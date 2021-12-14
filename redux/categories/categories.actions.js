@@ -31,6 +31,11 @@ export const fetchCategoriesAsync = () => {
       const categories = categoryNamesList.map((categoryName) =>
         createCategoryObject(categoryName)
       );
+
+      const productsByCategory = await axios.get(
+        `https://fakestoreapi.com/products/${categoryName}`
+      );
+      console.log(productsByCategory);
       dispatch(fetchCategoriesSuccess(categories));
     } catch (error) {
       console.log(error);

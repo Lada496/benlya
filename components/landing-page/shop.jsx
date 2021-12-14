@@ -1,13 +1,12 @@
 import Link from "next/link";
+import ShopItem from "./shop-item";
 
 const Shop = ({ list }) => {
   return (
     <div>
       <h1>Landing</h1>
-      {list.map((category, index) => (
-        <Link key={index} href={`/shop${category.path}`}>
-          {category.name}
-        </Link>
+      {list.map((category) => (
+        <ShopItem key={category.id} item={category} />
       ))}
     </div>
   );

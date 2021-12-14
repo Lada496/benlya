@@ -1,4 +1,5 @@
 import Head from "next/head";
+
 import ShopList from "../../components/shop/shop-list";
 
 const DUMMY = [
