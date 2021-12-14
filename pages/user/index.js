@@ -13,7 +13,7 @@ const DUMMY = {
   ],
 };
 
-const WishList = () => {
+const WishListPage = () => {
   return (
     <>
       <Head>
@@ -25,4 +25,4 @@ const WishList = () => {
   );
 };
 
-export default WishList;
+export default WishListPage;

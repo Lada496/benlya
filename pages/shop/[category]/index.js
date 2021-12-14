@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { withRouter } from "next/router";
-import CategoryPageComponent from "../../../components/category-page/category-page";
 import ProductsList from "../../../components/products-list/products-list";
 
 const DUMMY = [

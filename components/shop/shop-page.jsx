@@ -1,3 +1,4 @@
+//delete
 import React from "react";
 import ShopList from "./shop-list";
 const DUMMY = [

@@ -1,9 +1,9 @@
-import React from "react";
-import { withRouter } from "next/router";
-
-const ProductPageComponent = ({ router }) => {
-  console.log(router);
-  return <h1>{router.query.productId}</h1>;
+const ProductPageComponent = ({ product }) => {
+  return (
+    <>
+      <h1>{product.title}</h1>
+    </>
+  );
 };
 
-export default withRouter(ProductPageComponent);
+export default ProductPageComponent;

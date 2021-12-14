@@ -1,4 +1,5 @@
 import { withRouter } from "next/router";
+import ProductPageComponent from "../../components/product-page/product-page";
 const DUMMY = [
   { id: 1, title: "product1" },
   { id: 2, title: "product2" },
@@ -7,13 +8,17 @@ const DUMMY = [
   { id: 5, title: "product5" },
 ];
 
-const WishListProduct = ({ router }) => {
+const WishListProductPage = ({ router }) => {
   const product = DUMMY.find(
     (product) => product.id === +router.query["wish-list-productId"]
   );
   console.log(router);
   console.log(product);
-  return <div>product</div>;
+  return (
+    <>
+      <ProductPageComponent product={product} />
+    </>
+  );
 };
 
-export default withRouter(WishListProduct);
+export default withRouter(WishListProductPage);

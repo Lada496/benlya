@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { withRouter } from "next/router";
 import ProductPageComponent from "../../../components/product-page/product-page";
 
@@ -29,8 +30,11 @@ const ProductPage = ({ router }) => {
   console.log(product);
   return (
     <>
-      <h1>{product.title}</h1>
-      {/* <ProductPageComponent /> */}
+      <Head>
+        <title>Product Page</title>
+        <meta name="description" content="Products detail page" />
+      </Head>
+      <ProductPageComponent product={product} />
     </>
   );
 };
