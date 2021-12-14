@@ -1,15 +1,12 @@
+import { useSelector } from "react-redux";
 import axios from "axios";
 import Shop from "../components/landing-page/shop";
 
-import { createCategoryObject } from "../utils/categories-creator";
-const DUMMY = [
-  { name: "women's clothing", path: "/womens-clothing" },
-  { name: "maleClothing", path: "/mens-clothing" },
-  { name: "jewelery", path: "/jewelery" },
-  { name: "electronics", path: "/electronics" },
-];
+import { createCategoryObject } from "../lib/categories-utils";
 
 const LandingPage = ({ categories, error }) => {
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  console.log(cartItems);
   console.log(categories);
   if (error) {
     return <p>{error}</p>;

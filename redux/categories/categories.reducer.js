@@ -5,9 +5,9 @@ import {
 } from "./category.types";
 
 const INIT_STATE = {
-  categories: null,
+  categories: [],
   isFetching: false,
-  errorMessage: undefined,
+  errorMessage: null,
 };
 
 const categoriesReducer = (state = INIT_STATE, action) => {
@@ -28,5 +28,9 @@ const categoriesReducer = (state = INIT_STATE, action) => {
         ...state,
         isFetching: false,
       };
+    default:
+      return state;
   }
 };
+
+export default categoriesReducer;

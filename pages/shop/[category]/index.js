@@ -1,5 +1,7 @@
 import Head from "next/head";
 import { withRouter } from "next/router";
+import axios from "axios";
+import { pathFinder } from "../../../lib/categories-utils";
 import ProductsList from "../../../components/products-list/products-list";
 
 const DUMMY = [
@@ -45,7 +47,7 @@ const DUMMY = [
   },
 ];
 
-const CategoryPage = ({ router }) => {
+const CategoryPage = ({ router, error, categories }) => {
   const categoryObject = DUMMY.filter(
     (category) => category.routePath === router.query.category
   )[0];
@@ -62,3 +64,47 @@ const CategoryPage = ({ router }) => {
 };
 
 export default withRouter(CategoryPage);
+
+export async function getStaticPaths() {
+  const categories = await axios.get(
+    "https://fakestoreapi.com/products/categories"
+  );
+  return {
+    fallback: "blocking",
+    paths: categories.data.map((category) => ({
+      params: { category: pathFinder(category) },
+    })),
+  };
+}
+
+export async function getStaticProps(context) {
+  try {
+    const categoryNamesList = await axios.get(
+      "https://fakestoreapi.com/products/categories"
+    );
+
+    // const categories = categoryNamesList.data.map(
+    //   async (categoryName) => await createCategoryObject(categoryName)
+    // );
+    // console.log(categories);
+    let categories = [];
+    for (const category of categoryNamesList.data) {
+      const categoryObject = await createCategoryObject(category);
+      // console.log(categoryObject);
+      categories.push(categoryObject);
+    }
+    console.log(categories);
+    return {
+      props: {
+        categories,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      props: {
+        error: "failed to fetch categories",
+      },
+    };
+  }
+}
