@@ -1,23 +1,20 @@
-import { useSelector, useDispatch, connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import axios from "axios";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+
 import Shop from "../components/landing-page/shop";
+
 import { fetchCategoriesAsync } from "../redux/categories/categories.actions";
-import { wrapper } from "../redux/store";
 
-import { createCategoryObject } from "../lib/categories-utils";
-import { loadGetInitialProps } from "next/dist/shared/lib/utils";
+const LandingPage = () => {
+  const dispatch = useDispatch();
 
-const LandingPage = ({ categories, error }) => {
-  const cartItems = useSelector((state) => state.cart.cartItems);
-  console.log(cartItems);
-  console.log(categories);
-  if (error) {
-    return <p>{error}</p>;
-  }
+  useEffect(() => {
+    dispatch(fetchCategoriesAsync());
+  }, []);
+
   return (
     <>
-      <Shop list={categories} />
+      <Shop />
     </>
   );
 };
@@ -25,7 +22,6 @@ const LandingPage = ({ categories, error }) => {
 export default LandingPage;
 
 // export async function getStaticProps(context) {
-
 //   try {
 //     const categoryNamesList = await axios.get(
 //       "https://fakestoreapi.com/products/categories"
@@ -50,11 +46,3 @@ export default LandingPage;
 //     };
 //   }
 // }
-
-export const getStaticProps = wrapper.getStaticProps((store) => () => {
-  store.dispatch(fetchCategoriesAsync());
-});
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {};
-// };

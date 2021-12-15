@@ -24,22 +24,24 @@ export const fetchCategoriesFailure = (errorMessage) => ({
 export const fetchCategoriesAsync = () => {
   return async (dispatch) => {
     try {
-      dispatch(fetchDirectoryStart());
+      dispatch(fetchCategoriesStart());
       const categoryNamesList = await axios.get(
         "https://fakestoreapi.com/products/categories"
       );
-      const categories = categoryNamesList.map((categoryName) =>
-        createCategoryObject(categoryName)
-      );
+      let categories = [];
+      for (const category of categoryNamesList.data) {
+        const categoryObject = await createCategoryObject(category);
+        categories.push(categoryObject);
+      }
 
-      const productsByCategory = await axios.get(
-        `https://fakestoreapi.com/products/${categoryName}`
-      );
-      console.log(productsByCategory);
+      // const productsByCategory = await axios.get(
+      //   `https://fakestoreapi.com/products/${categoryName}`
+      // );
+      // console.log(productsByCategory);
       dispatch(fetchCategoriesSuccess(categories));
     } catch (error) {
       console.log(error);
-      dispatch(fetchDirectoryFailure("Failed to fatch categories"));
+      dispatch(fetchCategoriesFailure("Failed to fatch categories"));
     }
   };
 };

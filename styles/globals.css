@@ -1,0 +1,44 @@
+@media only screen and (max-width: 768px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+main {
+  min-height: 95vh;
+}
+li {
+  list-style: none;
+  list-style-type: none;
+  text-decoration: none;
+}
+a {
+  text-decoration: none;
+}
+
+h1 {
+  margin-top: 2rem;
+  text-transform: uppercase;
+  text-align: center;
+  color: #212529;
+}
+
+h2 {
+  margin-top: 3rem;
+  text-transform: uppercase;
+  color: #212529;
+  text-align: center;
+}
+
+footer {
+  margin-top: 3rem;
+  text-align: center;
+  height: 3rem;
+  display: block;
+  color: white;
+  background-color: #212529;
+  position: relative;
+}
+
+footer p {
+  padding-top: 0.7rem;
+}
