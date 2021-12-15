@@ -5,12 +5,12 @@ import {
   RESET_CART,
 } from "./cart.types";
 
-export const addItemAction = (item) => ({
+export const addItemToCartAction = (item) => ({
   type: ADD_CART_ITEM,
   payload: item,
 });
 
-export const removeItemAction = (item) => ({
+export const removeItemFromCartAction = (item) => ({
   type: REMOVE_CART_ITEM,
   payload: item,
 });

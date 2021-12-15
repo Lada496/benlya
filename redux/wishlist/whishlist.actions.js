@@ -10,12 +10,12 @@ import {
   UPDATE_WISHLIST_FAILURE,
 } from "./whishlist.types";
 
-export const addItemAction = (item) => ({
+export const addItemToWishlistAction = (item) => ({
   type: ADD_WISHLIST_ITEM,
   payload: item,
 });
 
-export const removeItemAction = (item) => ({
+export const removeItemfromWishlistAction = (item) => ({
   type: REMOVE_WISHLIST_ITEM,
   payload: item,
 });

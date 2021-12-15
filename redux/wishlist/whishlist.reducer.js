@@ -11,7 +11,9 @@ import {
 } from "./whishlist.types";
 
 const INIT_STATE = {
-  whishlist: [],
+  title: "whishlist",
+  products: [],
+  path: "user",
 };
 
 const wishlistReducer = (state = INIT_STATE, action) => {
@@ -19,12 +21,14 @@ const wishlistReducer = (state = INIT_STATE, action) => {
     case ADD_WISHLIST_ITEM:
       return {
         ...state,
-        whishlist: [...state.whishlist, action.payload],
+        products: [...state.products, action.payload],
       };
     case REMOVE_WISHLIST_ITEM:
       return {
         ...state,
-        whishlist: whishlist.filter((item) => item.id !== action.payload.id),
+        products: state.products.filter(
+          (item) => item.id !== action.payload.id
+        ),
       };
     case CLEAR_WISHLIST:
       return INIT_STATE;

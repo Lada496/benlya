@@ -6,8 +6,9 @@ import ColContainer from "../ui/col-container";
 import CardImgContainer from "../ui/card-img-container";
 import CardLinkContainer from "../ui/card-link-container";
 
-const ProductItem = ({ item, router }) => {
-  console.log("product item", router);
+const ProductItem = ({ item }) => {
+  //   console.log("product item", router);
+  console.log("product item", item);
   const categoryPath = pathFinder(item.category);
   return (
     <ColContainer>
@@ -20,10 +21,10 @@ const ProductItem = ({ item, router }) => {
         <Card.Body>
           <Card.Title style={{ fontSize: "1rem" }}>{item.title}</Card.Title>
           <Card.Text>${item.price}</Card.Text>
+          {/* <CardLinkContainer link={`/shop/${categoryPath}/${item.id}`} /> */}
           <CardLinkContainer link={`/shop/${categoryPath}/${item.id}`} />
         </Card.Body>
       </Card>
-      {/* <Link href={`/shop/${categoryPath}/${item.id}`}>View Detail</Link> */}
     </ColContainer>
   );
 };

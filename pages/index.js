@@ -20,29 +20,3 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
-
-// export async function getStaticProps(context) {
-//   try {
-//     const categoryNamesList = await axios.get(
-//       "https://fakestoreapi.com/products/categories"
-//     );
-//     let categories = [];
-//     for (const category of categoryNamesList.data) {
-//       const categoryObject = await createCategoryObject(category);
-//       categories.push(categoryObject);
-//     }
-//     console.log(categories);
-//     return {
-//       props: {
-//         categories,
-//       },
-//     };
-//   } catch (error) {
-//     console.log(error);
-//     return {
-//       props: {
-//         error: "failed to fetch categories",
-//       },
-//     };
-//   }
-// }
