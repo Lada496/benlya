@@ -13,9 +13,9 @@ const AuthPage = () => {
         <title>{isLogin ? "Login" : "Sign Up"}</title>
         <meta name="description" content="Authentication Page" />
       </Head>
-      {/* {isLogin && <Login setIsLogin={setIsLogin} />}
-      {!isLogin && <SignUp setIsLogin={setIsLogin} />} */}
-      <Message text="Comming soon..." />
+      {isLogin && <Login setIsLogin={setIsLogin} />}
+      {!isLogin && <SignUp setIsLogin={setIsLogin} />}
+      {/* <Message text="Comming soon..." /> */}
     </>
   );
 };

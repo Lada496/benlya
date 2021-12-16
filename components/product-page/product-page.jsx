@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/client";
 import { Row, Col, Card } from "react-bootstrap";
 import {
   addItemToCartAction,
@@ -12,10 +14,12 @@ import {
 import ButtonContainer from "../ui/button-container";
 
 const ProductPageComponent = ({ product }) => {
+  const [session, loading] = useSession();
+  const router = useRouter();
+  console.log(router);
   const wishlist = useSelector((state) => state.wishlist.products);
   const cartItems = useSelector((state) => state.cart.cartItems);
   const isIncluded = (item) => item.id === product.id;
-  console.log(wishlist.some(isIncluded));
   const [inWishlist, setInWishlist] = useState(wishlist.some(isIncluded));
   const [inCartlist, setInCartlist] = useState(cartItems.some(isIncluded));
   useEffect(() => {
@@ -28,18 +32,34 @@ const ProductPageComponent = ({ product }) => {
 
   const dispatch = useDispatch();
   const addToCartHandler = () => {
+    if (!session && !loading) {
+      router.push("/auth");
+      return;
+    }
     dispatch(addItemToCartAction(product));
   };
 
   const removeFromCartHandler = () => {
+    if (!session && !loading) {
+      router.push("/auth");
+      return;
+    }
     dispatch(clearItemFromCartAction(product));
   };
 
   const addToWishlistHandler = () => {
+    if (!session && !loading) {
+      router.push("/auth");
+      return;
+    }
     dispatch(addItemToWishlistAction(product));
   };
 
   const removeFromWishlistHandker = () => {
+    if (!session && !loading) {
+      router.push("/auth");
+      return;
+    }
     dispatch(removeItemfromWishlistAction(product));
   };
 
