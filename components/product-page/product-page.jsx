@@ -16,7 +16,6 @@ import ButtonContainer from "../ui/button-container";
 const ProductPageComponent = ({ product }) => {
   const [session, loading] = useSession();
   const router = useRouter();
-  console.log(router);
   const wishlist = useSelector((state) => state.wishlist.products);
   const cartItems = useSelector((state) => state.cart.cartItems);
   const isIncluded = (item) => item.id === product.id;

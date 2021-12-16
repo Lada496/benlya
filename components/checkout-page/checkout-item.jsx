@@ -25,7 +25,8 @@ const CheckoutItem = ({ item }) => {
       <Row style={{ padding: "1rem" }} className="align-items-center">
         <Col xs={3}>
           <div className={classes.img}>
-            <Image src={item.image} alt={item.title} width={200} height={200} />
+            {/* <Image src={item.image} alt={item.title} width={200} height={200} /> */}
+            <img src={item.image} alt={item.title} />
           </div>
         </Col>
         <Col xs={9}>
