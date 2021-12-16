@@ -1,8 +1,15 @@
 import Link from "next/link";
-import { Navbar, Container, Nav } from "react-bootstrap";
+import { useRouter } from "next/router";
+import { useSession, signOut } from "next-auth/client";
+import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import classes from "./header.module.css";
 
 const Header = () => {
+  const router = useRouter();
+  const [session, loading] = useSession();
+  const logoutHandler = () => {
+    signOut({ redirect: false });
+  };
   return (
     <header className={classes.nav}>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -22,9 +29,14 @@ const Header = () => {
               }}
             >
               <Link href="/shop">Shop</Link>
-              <Link href="/auth">Login</Link>
+              {!session && !loading && <Link href="/auth">Login</Link>}
               <Link href="/user">Wishlist</Link>
               <Link href="/checkout">Checkout</Link>
+              {session && (
+                <Button onClick={logoutHandler} variant="outline-light">
+                  Logout
+                </Button>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>

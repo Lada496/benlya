@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import Head from "next/head";
+import { getSession } from "next-auth/client";
 
 import { Row } from "react-bootstrap";
 import CheckoutList from "../../components/checkout-page/checkout-list";
@@ -22,5 +23,21 @@ const ChackoutPage = () => {
     </>
   );
 };
+
+export async function getServerSideProps(context) {
+  const session = await getSession({ req: context.req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: { session },
+  };
+}
 
 export default ChackoutPage;
