@@ -10,6 +10,11 @@ const CheckoutList = ({ list }) => {
   );
   return (
     <div className={classes.container}>
+      <Alert variant="warning" style={{ marginTop: "2rem" }}>
+        * Use the following test credit cart for payment *
+        <br />
+        4242 4242 4242 4242 - Exp: future date - CVC: 123
+      </Alert>
       <Card style={{ maxWidth: "500px", margin: "auto" }}>
         <ListGroup>
           {list.map((item) => (
@@ -25,11 +30,6 @@ const CheckoutList = ({ list }) => {
           </div>
         </Card.Footer>
       </Card>
-      <Alert variant="warning" style={{ marginTop: "2rem" }}>
-        * Use the following test credit cart for payment *
-        <br />
-        4242 4242 4242 4242 - Exp: future date - CVC: 123
-      </Alert>
     </div>
   );
 };
