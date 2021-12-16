@@ -7,7 +7,9 @@ const Login = ({ setIsLogin }) => {
   return (
     <div>
       <h1>Login</h1>
-      <p>New Here? <span onClick={goToSignUpHandler}>Sign Up</span></p>
+      <p>
+        New Here? <span onClick={goToSignUpHandler}>Sign Up</span>
+      </p>
     </div>
   );
 };

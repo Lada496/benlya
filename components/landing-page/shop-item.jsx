@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Card } from "react-bootstrap";
 import ColContainer from "../ui/col-container";
 import CardImgContainer from "../ui/card-img-container";

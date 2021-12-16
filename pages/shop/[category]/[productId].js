@@ -5,16 +5,10 @@ import ProductPageComponent from "../../../components/product-page/product-page"
 import { pathFinder } from "../../../lib/categories-utils";
 
 const ProductPage = ({ router, products }) => {
-  // axios.get("https://fakestoreapi.com/products").then((data) => {
-  //   console.log(data);
-  // });
-  console.log(products);
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
-  console.log("product", router);
   const product = products.find((item) => item.id === +router.query.productId);
-  console.log(product);
   return (
     <>
       <Head>

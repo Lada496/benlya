@@ -2,15 +2,15 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 import ShopItem from "./shop-item";
 import RowContainer from "../ui/row-container";
+import Message from "../ui/message";
 
 const Shop = () => {
   const categories = useSelector((state) => state.categories);
-  console.log(categories);
   if (categories.isFetching) {
-    return <p>Loading...</p>;
+    return <Message text="Loading..." />;
   }
   if (categories.errorMessage) {
-    return <p>Shop data fetch failed</p>;
+    return <Message text="Shop data fetch failed"/>;
   }
   const list = categories.categories;
 

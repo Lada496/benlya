@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col, Card, Button } from "react-bootstrap";
+import { Row, Col, Card } from "react-bootstrap";
 import {
   addItemToCartAction,
   clearItemFromCartAction,
@@ -14,8 +14,6 @@ import ButtonContainer from "../ui/button-container";
 const ProductPageComponent = ({ product }) => {
   const wishlist = useSelector((state) => state.wishlist.products);
   const cartItems = useSelector((state) => state.cart.cartItems);
-  console.log(wishlist);
-  console.log(cartItems);
   const isIncluded = (item) => item.id === product.id;
   console.log(wishlist.some(isIncluded));
   const [inWishlist, setInWishlist] = useState(wishlist.some(isIncluded));
@@ -68,13 +66,6 @@ const ProductPageComponent = ({ product }) => {
                   text="Add to cart"
                   clickHandler={addToCartHandler}
                 />
-                // <Button
-                //   onClick={addToCartHandler}
-                //   style={{ textTransform: "uppercase" }}
-                //   variant="primary"
-                // >
-                //   Add to cart
-                // </Button>
               )}
               {inCartlist && (
                 <ButtonContainer
@@ -83,23 +74,14 @@ const ProductPageComponent = ({ product }) => {
                 />
               )}
 
-              {
-                !inWishlist && (
-                  <ButtonContainer
-                    text="Add to wishlist"
-                    clickHandler={addToWishlistHandler}
-                    styles={{ marginLeft: "0.5rem" }}
-                    varient="outline-primary"
-                  />
-                )
-                //   <Button
-                //     onClick={addToWishlistHandler}
-                //     style={{ marginLeft: "1.5rem", textTransform: "uppercase" }}
-                //     variant="outline-primary"
-                //   >
-                //     Add to wishlist
-                //   </Button>
-              }
+              {!inWishlist && (
+                <ButtonContainer
+                  text="Add to wishlist"
+                  clickHandler={addToWishlistHandler}
+                  styles={{ marginLeft: "0.5rem" }}
+                  varient="outline-primary"
+                />
+              )}
               {inWishlist && (
                 <ButtonContainer
                   text="remove from wishlist"

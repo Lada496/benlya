@@ -4,7 +4,6 @@ import ProductsList from "../../components/products-list/products-list";
 
 const WishListPage = () => {
   const wishlist = useSelector((state) => state.wishlist);
-  console.log(wishlist);
   return (
     <>
       <Head>
