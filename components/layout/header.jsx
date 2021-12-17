@@ -1,14 +1,16 @@
+import { useDispatch } from "react-redux";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useSession, signOut } from "next-auth/client";
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
+import { resetCart } from "../../redux/cart/cart.actions";
 import classes from "./header.module.css";
 
 const Header = () => {
-  const router = useRouter();
+  const dispatch = useDispatch();
   const [session, loading] = useSession();
-  const logoutHandler = () => {
-    signOut({ redirect: false });
+  const logoutHandler = async () => {
+    await signOut({ redirect: false });
+    dispatch(resetCart());
   };
   return (
     <header className={classes.nav}>
