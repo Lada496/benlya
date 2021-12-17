@@ -33,7 +33,7 @@ const cartReducer = (state = INIT_STATE, action) => {
         ),
       };
     case RESET_CART:
-      return INITIAL_STATE;
+      return INIT_STATE;
     default:
       return state;
   }
