@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import Image from "next/image";
-import { Row, Col, ListGroupItem, Card } from "react-bootstrap";
+import { Row, Col, ListGroupItem } from "react-bootstrap";
 import {
   removeItemFromCartAction,
   addItemToCartAction,
@@ -39,15 +39,19 @@ const CheckoutItem = ({ item }) => {
               style={{ fontSize: "1.5rem", padding: "0 1rem" }}
               onClick={clearItemHandler}
             >
-              &#10005;
+              <span className={classes.hover}>&#10005;</span>
             </Col>
           </Row>
 
           <h4>{item.title}</h4>
           <Row xs="auto">
-            <Col onClick={removeItemHandler}>&#8722;</Col>
+            <Col onClick={removeItemHandler}>
+              <span className={classes.hover}>&#8722;</span>
+            </Col>
             <Col>{item.quantity}</Col>
-            <Col onClick={addItemHandler}>&#43;</Col>
+            <Col onClick={addItemHandler}>
+              <span className={classes.hover}>&#43;</span>
+            </Col>
           </Row>
         </Col>
       </Row>
