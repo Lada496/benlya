@@ -1,15 +1,23 @@
 import { Provider } from "react-redux";
 import { Provider as AuthProvider } from "next-auth/client";
-import { wrapper } from "../redux/store";
-import { useStore } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
+import { useStore } from "../redux/store";
 import Head from "next/head";
 import Layout from "../components/layout/layout";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/globals.css";
 
-function App({ Component, pageProps }) {
-  const store = useStore((state) => state);
+// const WrappedApp = ({ Component, pageProps }) => {
+//   return (
+//     <Layout>
+//       <Component {...pageProps} />
+//     </Layout>
+//   );
+// };
+
+// export default wrapper.withRedux(WrappedApp);
+
+export default function App({ Component, pageProps }) {
+  const store = useStore(pageProps.initialReduxState);
   return (
     <AuthProvider session={pageProps.session}>
       <Provider store={store}>
@@ -25,22 +33,9 @@ function App({ Component, pageProps }) {
           />
         </Head>
         <Layout>
-          {process.browser ? (
-            <PersistGate
-              persistor={store.__persistor}
-              loading={<div>Loading</div>}
-            >
-              <Component {...pageProps} />
-            </PersistGate>
-          ) : (
-            <PersistGate persistor={store}>
-              <Component {...pageProps} />
-            </PersistGate>
-          )}
+          <Component {...pageProps} />
         </Layout>
       </Provider>
     </AuthProvider>
   );
 }
-
-export default wrapper.withRedux(App);
