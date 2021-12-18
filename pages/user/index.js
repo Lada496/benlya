@@ -1,10 +1,29 @@
-import { useSelector } from "react-redux";
-import { getSession } from "next-auth/client";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+import { getSession, useSession } from "next-auth/client";
 import Head from "next/head";
 import ProductsList from "../../components/products-list/products-list";
+import { fetchWishlistAsync } from "../../redux/wishlist/whishlist.actions";
 
-const WishListPage = () => {
+const WishListPage = (props) => {
+  const router = useRouter();
+  const session = useSession();
+  const dispatch = useDispatch();
   const wishlist = useSelector((state) => state.wishlist);
+
+  useEffect(() => {
+    if (!session[0]) {
+      router.replace("/auth");
+    }
+  }, [session, router]);
+
+  useEffect(() => {
+    if (!wishlist.isFetching && !wishlist.isFetched) {
+      dispatch(fetchWishlistAsync());
+    }
+  }, [wishlist]);
+
   return (
     <>
       <Head>
@@ -18,6 +37,7 @@ const WishListPage = () => {
 
 export async function getServerSideProps(context) {
   const session = await getSession({ req: context.req });
+  console.log(session);
 
   if (!session) {
     return {
@@ -27,6 +47,7 @@ export async function getServerSideProps(context) {
       },
     };
   }
+
   return {
     props: { session },
   };

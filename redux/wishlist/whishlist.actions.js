@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import {
   ADD_WISHLIST_ITEM,
   REMOVE_WISHLIST_ITEM,
@@ -5,9 +7,7 @@ import {
   FETCH_WISHLIST_START,
   FETCH_WISHLIST_SUCCESS,
   FETCH_WISHLIST_FAILURE,
-  UPDATE_WISHLIST_START,
-  UPDATE_WISHLIST_SUCCESS,
-  UPDATE_WISHLIST_FAILURE,
+  RESET_WISHLIST,
 } from "./whishlist.types";
 
 export const addItemToWishlistAction = (item) => ({
@@ -25,11 +25,32 @@ export const clearItemFromWishlistAction = (item) => ({
   payload: item,
 });
 
-// export const updateWishistStart = () => ({
-//   type: UPDATE_WISHLIST_START,
-// });
+export const fetchWishlistStart = () => ({
+  type: FETCH_WISHLIST_START,
+});
 
-// export const updateWishlistSuccess = (wishlist) => ({
-//   type: UPDATE_WISHLIST_SUCCESS,
-//   payload:wishlist
-// });
+export const fetchWishlistSuccess = (whislist) => ({
+  type: FETCH_WISHLIST_SUCCESS,
+  payload: whislist,
+});
+
+export const fetchWishlistFailure = (errorMessage) => ({
+  type: FETCH_WISHLIST_FAILURE,
+  payload: errorMessage,
+});
+
+export const resetWishlist = () => ({
+  type: RESET_WISHLIST,
+});
+
+export const fetchWishlistAsync = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(fetchWishlistStart());
+      const wishlistObject = await axios.get("/api/whishlist");
+      dispatch(fetchWishlistSuccess(wishlistObject.data.wishlist));
+    } catch (error) {
+      dispatch(fetchWishlistFailure("Failed to fetch wishlist "));
+    }
+  };
+};

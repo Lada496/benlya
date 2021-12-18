@@ -1,9 +1,12 @@
-import React from "react";
+import { useSelector } from "react-redux";
 import Message from "../ui/message";
 import RowContainer from "../ui/row-container";
 import ProductItem from "./product-item";
 
 const ProductsList = ({ categoryObject }) => {
+  if (categoryObject.title === "wishlist" && categoryObject.isFetching) {
+    return <Message text="Loading..." />;
+  }
   return (
     <>
       <h1>{categoryObject.title}</h1>
