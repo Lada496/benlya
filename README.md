@@ -3,6 +3,7 @@
 ## Description
 
 ecommerce wibsite with dummy data
+Demo: https://e-shop-taupe.vercel.app/
 
 ## Purpose
 
