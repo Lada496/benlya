@@ -24,20 +24,22 @@ function App({ Component, pageProps }) {
             crossorigin="anonymous"
           />
         </Head>
-        <Layout>
-          {process.browser ? (
-            <PersistGate
-              persistor={store.__persistor}
-              loading={<div>Loading</div>}
-            >
+        {process.browser ? (
+          <PersistGate
+            persistor={store.__persistor}
+            loading={<div>Loading</div>}
+          >
+            <Layout>
               <Component {...pageProps} />
-            </PersistGate>
-          ) : (
-            <PersistGate persistor={store}>
+            </Layout>
+          </PersistGate>
+        ) : (
+          <PersistGate persistor={store}>
+            <Layout>
               <Component {...pageProps} />
-            </PersistGate>
-          )}
-        </Layout>
+            </Layout>
+          </PersistGate>
+        )}
       </Provider>
     </AuthProvider>
   );
