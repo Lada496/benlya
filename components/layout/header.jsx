@@ -1,11 +1,13 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/client";
-import { Navbar, Container, Nav, Button } from "react-bootstrap";
+import { Navbar, Container, Nav, Button, NavDropdown } from "react-bootstrap";
 import { resetCart } from "../../redux/cart/cart.actions";
 import classes from "./header.module.css";
 
 const Header = () => {
+  const categories = useSelector((state) => state.categories.categories);
+  console.log(categories);
   const dispatch = useDispatch();
   const [session, loading] = useSession();
   const logoutHandler = async () => {
@@ -30,7 +32,44 @@ const Header = () => {
                 alignItems: "center",
               }}
             >
-              <Link href="/shop">Shop</Link>
+              {categories.length === 0 ? (
+                <Link href="/shop">Shop</Link>
+              ) : (
+                <NavDropdown title="Shop" id="navbarScrollingDropdown">
+                  <Link href="/shop">
+                    <a
+                      style={{
+                        color: "#212529",
+                        paddingLeft: "0.5rem",
+                        display: "block",
+                      }}
+                    >
+                      Preview
+                    </a>
+                  </Link>
+                  <NavDropdown.Divider />
+                  {categories.map((category, index) => (
+                    <>
+                      <Link href={`/shop/${category.path}`}>
+                        <a
+                          style={{
+                            textTransform: "capitalize",
+                            color: "#212529",
+                            paddingLeft: "0.5rem",
+                            display: "block",
+                          }}
+                        >
+                          {category.title}
+                        </a>
+                      </Link>
+                      {index !== categories.length - 1 && (
+                        <NavDropdown.Divider />
+                      )}
+                    </>
+                  ))}
+                </NavDropdown>
+              )}
+
               {!session && !loading && <Link href="/auth">Login</Link>}
               <Link href="/user">Wishlist</Link>
               <Link href="/checkout">Checkout</Link>

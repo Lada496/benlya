@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import ShopItem from "./shop-item";
 import RowContainer from "../ui/row-container";
 import Message from "../ui/message";
+import Advertisement from "./advertisement";
 
 const Shop = () => {
   const categories = useSelector((state) => state.categories);
@@ -17,14 +18,17 @@ const Shop = () => {
   const list = categories.categories;
 
   return (
-    <div>
-      <h1>Categories</h1>
-      <RowContainer>
-        {list.map((category) => (
-          <ShopItem key={category.id} item={category} />
-        ))}
-      </RowContainer>
-    </div>
+    <>
+      <Advertisement />
+      <div>
+        <h1>Categories</h1>
+        <RowContainer>
+          {list.map((category) => (
+            <ShopItem key={category.id} item={category} />
+          ))}
+        </RowContainer>
+      </div>
+    </>
   );
 };
 
