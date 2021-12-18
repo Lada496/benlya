@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import Message from "../ui/message";
 import RowContainer from "../ui/row-container";
 import ProductItem from "./product-item";
