@@ -5,15 +5,16 @@ import {
   FETCH_WISHLIST_START,
   FETCH_WISHLIST_SUCCESS,
   FETCH_WISHLIST_FAILURE,
-  UPDATE_WISHLIST_START,
-  UPDATE_WISHLIST_SUCCESS,
-  UPDATE_WISHLIST_FAILURE,
+  RESET_WISHLIST,
 } from "./whishlist.types";
 
 const INIT_STATE = {
-  title: "whishlist",
+  title: "wishlist",
   products: [],
   path: "user",
+  isFetching: false,
+  errorMessage: null,
+  isFetched: false,
 };
 
 const wishlistReducer = (state = INIT_STATE, action) => {
@@ -31,6 +32,27 @@ const wishlistReducer = (state = INIT_STATE, action) => {
         ),
       };
     case CLEAR_WISHLIST:
+      return INIT_STATE;
+    case FETCH_WISHLIST_START:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case FETCH_WISHLIST_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        isFetched: true,
+        products: action.payload,
+      };
+    case FETCH_WISHLIST_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        errorMessage: action.payload,
+      };
+
+    case RESET_WISHLIST:
       return INIT_STATE;
     default:
       return state;

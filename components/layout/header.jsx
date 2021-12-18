@@ -3,16 +3,34 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/client";
 import { Navbar, Container, Nav, Button, NavDropdown } from "react-bootstrap";
 import { resetCart } from "../../redux/cart/cart.actions";
+import { resetWishlist } from "../../redux/wishlist/whishlist.actions";
 import classes from "./header.module.css";
+import DropdownItem from "./dropdown-item";
+
+const updateWishlistHandler = async (wishlist) => {
+  const resposnse = await fetch("/api/whishlist", {
+    method: "PATCH",
+    body: JSON.stringify({ wishlist }),
+    headers: { "Content-Type": "application/json" },
+  });
+  const data = await resposnse.json();
+};
 
 const Header = () => {
   const categories = useSelector((state) => state.categories.categories);
-  console.log(categories);
+  const wishlist = useSelector((state) => state.wishlist.products);
   const dispatch = useDispatch();
   const [session, loading] = useSession();
   const logoutHandler = async () => {
+    try {
+      await updateWishlistHandler(wishlist);
+    } catch (error) {
+      alert("Failed to upload wishlist!");
+    }
+
     await signOut({ redirect: false });
     dispatch(resetCart());
+    dispatch(resetWishlist());
   };
   return (
     <header className={classes.nav}>
@@ -49,23 +67,12 @@ const Header = () => {
                   </Link>
                   <NavDropdown.Divider />
                   {categories.map((category, index) => (
-                    <>
-                      <Link href={`/shop/${category.path}`}>
-                        <a
-                          style={{
-                            textTransform: "capitalize",
-                            color: "#212529",
-                            paddingLeft: "0.5rem",
-                            display: "block",
-                          }}
-                        >
-                          {category.title}
-                        </a>
-                      </Link>
-                      {index !== categories.length - 1 && (
-                        <NavDropdown.Divider />
-                      )}
-                    </>
+                    <DropdownItem
+                      category={category}
+                      key={index}
+                      index={index}
+                      length={categories.length}
+                    />
                   ))}
                 </NavDropdown>
               )}

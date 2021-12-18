@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useSelector } from "react-redux";
 
 import ShopList from "../../components/shop-page/shop-list";
+import Message from "../../components/ui/message";
 
 const ShopPage = () => {
   const categories = useSelector((state) => state.categories);

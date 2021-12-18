@@ -36,7 +36,7 @@ export const fetchCategoriesAsync = () => {
       dispatch(fetchCategoriesSuccess(categories));
     } catch (error) {
       console.log(error);
-      dispatch(fetchCategoriesFailure("Failed to fatch categories"));
+      dispatch(fetchCategoriesFailure("Failed to fetch categories"));
     }
   };
 };
