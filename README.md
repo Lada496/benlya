@@ -2,7 +2,7 @@
 
 ## Description
 
-ecommerce wibside with dummy data
+ecommerce wibsite with dummy data
 
 ## Purpose
 
