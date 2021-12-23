@@ -7,6 +7,7 @@ import Head from "next/head";
 import Layout from "../components/layout/layout";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/globals.css";
+import "semantic-ui-css/semantic.min.css";
 
 function App({ Component, pageProps }) {
   const store = useStore((state) => state);
