@@ -3,12 +3,11 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/client";
 import { resetCart } from "../../redux/cart/cart.actions";
 import { resetWishlist } from "../../redux/wishlist/whishlist.actions";
-import { Icon } from "semantic-ui-react";
 import {
   HeaderContainer,
-  //   HamburgerMenuContaier,
   LogoContainer,
   NavContainer,
+  IconContainer,
 } from "./header.styles";
 const Header = () => {
   const categories = useSelector((state) => state.categories.categories);
@@ -28,27 +27,27 @@ const Header = () => {
   };
   return (
     <HeaderContainer>
-      <Icon name="sidebar" size="big" inverted />
-      <LogoContainer href="/">
-        <a>BeOshare</a>
-      </LogoContainer>
+      <IconContainer name="sidebar" size="big" inverted />
+      <Link href="/">
+        <LogoContainer>BeOshare</LogoContainer>
+      </Link>
       <nav>
         <NavContainer>
           {!session && !loading && (
             <li>
               <Link href="/auth">
-                <Icon name="user" size="large" inverted />
+                <IconContainer name="user" size="large" inverted />
               </Link>
             </li>
           )}
           {session && (
-            <li>
-              <Icon name="sign-out" size="large" inverted />
+            <li onClick={logoutHandler}>
+              <IconContainer name="sign-out" size="large" inverted />
             </li>
           )}
           <li>
             <Link href="/checkout">
-              <Icon name="shopping cart" size="large" inverted />
+              <IconContainer name="shopping cart" size="large" inverted />
             </Link>
           </li>
         </NavContainer>

@@ -13,6 +13,17 @@ export const LogoContainer = styled.a`
   font-size: 2.5rem;
   color: white;
   display: block;
+  &:hover {
+    color: white;
+    text-decolation: underline;
+    cursor: pointer;
+  }
+`;
+
+export const IconContainer = styled(Icon)`
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const NavContainer = styled.ul`
