@@ -24,6 +24,12 @@ function App({ Component, pageProps }) {
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
             crossorigin="anonymous"
           />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Italiana&family=Poiret+One&family=Spartan:wght@200;300;400;500;700&display=swap"
+            rel="stylesheet"
+          />
         </Head>
         {process.browser ? (
           <PersistGate
