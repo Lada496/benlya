@@ -4,8 +4,9 @@ import { Icon } from "semantic-ui-react";
 export const HeaderContainer = styled.header`
   background-color: black;
   padding: 1.5rem 1.5rem 0.5rem 1.5rem;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 8rem auto 8rem;
+  align-items: center;
 `;
 
 export const LogoContainer = styled.a`
@@ -13,6 +14,7 @@ export const LogoContainer = styled.a`
   font-size: 2.5rem;
   color: white;
   display: block;
+  text-align: center;
   &:hover {
     color: white;
     text-decolation: underline;

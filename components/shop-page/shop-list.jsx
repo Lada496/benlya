@@ -9,7 +9,7 @@ const ShopList = ({ category }) => {
       : category.products.slice(0, 4);
   return (
     <>
-      <h2>{category.title}</h2>
+      <h2 className="h2">{category.title}</h2>
       <RowContainer>
         {filteredList.map((item) => (
           //   <ShopItem key={item.id} item={item} />

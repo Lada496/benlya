@@ -9,8 +9,7 @@ import {
   NavContainer,
   IconContainer,
 } from "./header.styles";
-const Header = () => {
-  const categories = useSelector((state) => state.categories.categories);
+const Header = ({ setVisible, visible }) => {
   const wishlist = useSelector((state) => state.wishlist.products);
   const dispatch = useDispatch();
   const [session, loading] = useSession();
@@ -25,9 +24,17 @@ const Header = () => {
     dispatch(resetCart());
     dispatch(resetWishlist());
   };
+  const showSidebarHandler = () => {
+    setVisible(true);
+  };
   return (
     <HeaderContainer>
-      <IconContainer name="sidebar" size="big" inverted />
+      <IconContainer
+        onClick={showSidebarHandler}
+        name={visible ? "close" : "sidebar"}
+        size="big"
+        inverted
+      />
       <Link href="/">
         <LogoContainer>BeOshare</LogoContainer>
       </Link>

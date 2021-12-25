@@ -41,7 +41,7 @@ const Login = ({ setIsLogin }) => {
   };
   return (
     <>
-      <h1>Login</h1>
+      <h1 className="h1">Login</h1>
       <Card style={{ width: "18rem", margin: "2rem auto" }}>
         <Card.Body style={{ backgroundColor: "white" }}>
           {loading && <Message text="Checking" />}

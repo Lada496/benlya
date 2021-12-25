@@ -14,7 +14,7 @@ const ChackoutPage = () => {
         <title>Checkout</title>
         <meta name="description" content="Checkout Page" />
       </Head>
-      <h1>Checkout</h1>
+      <h1 className="h1">Checkout</h1>
       {(!cartItems || cartItems.length === 0) && (
         <Message text="No items added yet!" />
       )}

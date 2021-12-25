@@ -21,7 +21,7 @@ const Shop = () => {
     <>
       <Advertisement />
       <div>
-        <h1>Categories</h1>
+        <h1 className="h1">Categories</h1>
         <RowContainer>
           {list.map((category) => (
             <ShopItem key={category.id} item={category} />
