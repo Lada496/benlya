@@ -20,11 +20,16 @@ const SliderNav = ({ visible, setVisible }) => {
           <Link href="/shop">Shop</Link>
         </Menu.Item>
       ) : (
-        categories.map((category, index) => (
-          <Menu.Item key={index}>
-            <Link href={`/shop/${category.path}`}>{category.title}</Link>
+        <>
+          <Menu.Item>
+            <Link href="/shop">Preview</Link>
           </Menu.Item>
-        ))
+          {categories.map((category, index) => (
+            <Menu.Item key={index}>
+              <Link href={`/shop/${category.path}`}>{category.title}</Link>
+            </Menu.Item>
+          ))}
+        </>
       )}
     </Sidebar>
   );

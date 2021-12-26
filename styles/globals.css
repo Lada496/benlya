@@ -67,3 +67,7 @@ footer p {
   font-family: var(--font-spartan);
   text-transform: capitalize;
 }
+
+.ui.grid > .column:not(.row) {
+  padding: 0;
+}
