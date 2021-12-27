@@ -38,8 +38,7 @@ const Login = ({ setIsLogin }) => {
         throw Error();
       }
     } catch (error) {
-      setLoginError("Login Failed");
-      console.log(error.message);
+      setLoginError("Login Failed!");
     } finally {
       setLoading(false);
       e.target.reset();
@@ -49,7 +48,7 @@ const Login = ({ setIsLogin }) => {
     <>
       <h1 className="h1">Login</h1>
       <CardContainer>
-        {loading && <Message text="Checking" />}
+        {loading && <Message text="Checking..." />}
         <div>
           <FormContainer onSubmit={handleSubmit(onSubmit)}>
             {loginError && <p>{loginError}</p>}

@@ -5,6 +5,7 @@ import { Card } from "react-bootstrap";
 import Message from "../ui/message";
 import classes from "./form.module.css";
 import { createUser } from "../../lib/auth-utils";
+import { CardContainer, FormContainer, LinkContainer } from "./form.styles";
 
 const SignUp = ({ setIsLogin }) => {
   const router = useRouter();
@@ -17,7 +18,7 @@ const SignUp = ({ setIsLogin }) => {
     handleSubmit,
     watch,
   } = useForm({
-    mode: "onBlur", // "onChange"
+    mode: "onChange", // "onBlur"
   });
   const goToLoginHandler = () => {
     setIsLogin(true);
@@ -46,53 +47,51 @@ const SignUp = ({ setIsLogin }) => {
   return (
     <div>
       <h1 className="h1">Sing Up</h1>
-      <Card style={{ width: "18rem", margin: "2rem auto" }}>
-        <Card.Body style={{ backgroundColor: "white" }}>
-          {loading && <Message text="Processing" />}
-          <div className={classes.form}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              {signupError && <p>{signupError}</p>}
-              <div>
-                <label htmlFor="email">Email</label>
-                <input
-                  {...register("email", {
-                    required: true,
-                    pattern:
-                      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                  })}
-                />
-                {errors.email && <p>Please enter a valid email</p>}
-              </div>
+      <CardContainer>
+        {loading && <Message text="Processing..." />}
+        <div>
+          <FormContainer onSubmit={handleSubmit(onSubmit)}>
+            {signupError && <p>{signupError}</p>}
+            <div>
+              <label htmlFor="email">Email</label>
+              <input
+                {...register("email", {
+                  required: true,
+                  pattern:
+                    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                })}
+              />
+              {errors.email && <p>Please enter a valid email</p>}
+            </div>
 
-              <div>
-                <label htmlFor="password1">Password</label>
-                <input
-                  type="password"
-                  {...register("password1", { required: true, minLength: 6 })}
-                />
-                {errors.password1 && <p>Password should be at least 6 words</p>}
-              </div>
+            <div>
+              <label htmlFor="password1">Password</label>
+              <input
+                type="password"
+                {...register("password1", { required: true, minLength: 6 })}
+              />
+              {errors.password1 && <p>Password should be at least 6 words</p>}
+            </div>
 
-              <div>
-                <label htmlFor="password2">Confirm Password</label>
-                <input
-                  type="password"
-                  {...register("password2", {
-                    required: true,
-                    validate: (value) => value === passwordInput,
-                  })}
-                />
-                {errors.password2 && <p>Passwords do not match</p>}
-              </div>
+            <div>
+              <label htmlFor="password2">Confirm Password</label>
+              <input
+                type="password"
+                {...register("password2", {
+                  required: true,
+                  validate: (value) => value === passwordInput,
+                })}
+              />
+              {errors.password2 && <p>Passwords do not match</p>}
+            </div>
 
-              <input type="submit" />
-            </form>
-          </div>
-        </Card.Body>
-      </Card>
-      <p className={classes.link}>
+            <input type="submit" />
+          </FormContainer>
+        </div>
+      </CardContainer>
+      <LinkContainer>
         Already Member? <span onClick={goToLoginHandler}>Login</span>
-      </p>
+      </LinkContainer>
     </div>
   );
 };
