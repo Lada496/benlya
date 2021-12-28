@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import { Card } from "react-bootstrap";
 import Message from "../ui/message";
-import classes from "./form.module.css";
 import { createUser } from "../../lib/auth-utils";
 import { CardContainer, FormContainer, LinkContainer } from "./form.styles";
 

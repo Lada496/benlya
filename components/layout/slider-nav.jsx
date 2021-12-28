@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { useSelector } from "react-redux";
+import { useSession } from "next-auth/client";
 import { Sidebar, Menu } from "semantic-ui-react";
 
 const SliderNav = ({ visible, setVisible }) => {
   const categories = useSelector((state) => state.categories.categories);
+  const [session, loading] = useSession();
   return (
     <Sidebar
       as={Menu}
@@ -30,6 +32,11 @@ const SliderNav = ({ visible, setVisible }) => {
             </Menu.Item>
           ))}
         </>
+      )}
+      {session && (
+        <Menu.Item>
+          <Link href="/user">whishlist</Link>
+        </Menu.Item>
       )}
     </Sidebar>
   );

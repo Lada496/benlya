@@ -1,7 +1,8 @@
 import styled from "styled-components";
 export const ItemContainer = styled.div`
   height: 24rem;
-  width: 90%;
+  max-width: 90%;
+  max-height: 90%;
   margin: auto;
   background: center / contain no-repeat url(${(props) => props.imageUrl});
   &:hover {
@@ -28,4 +29,5 @@ export const RatingContainer = styled.div`
   gap: 1rem;
   margin: auto;
   justify-content: center;
+  margin-bottom: 3rem;
 `;

@@ -9,6 +9,14 @@ import {
   NavContainer,
   IconContainer,
 } from "./header.styles";
+const updateWishlistHandler = async (wishlist) => {
+  const resposnse = await fetch("/api/whishlist", {
+    method: "PATCH",
+    body: JSON.stringify({ wishlist }),
+    headers: { "Content-Type": "application/json" },
+  });
+  const data = await resposnse.json();
+};
 const Header = ({ setVisible, visible }) => {
   const wishlist = useSelector((state) => state.wishlist.products);
   const dispatch = useDispatch();

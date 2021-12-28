@@ -1,7 +1,12 @@
-import { Card, ListGroup, Alert } from "react-bootstrap";
 import CheckoutButton from "./checkout-button";
 import CheckoutItem from "./checkout-item";
-import classes from "./checkout-list.module.css";
+import { Message } from "semantic-ui-react";
+import {
+  CheckoutPageContainer,
+  CheckoutHeaderContainer,
+  HeaderBlockContainer,
+  TotalContainer,
+} from "./checkout-list.styles";
 
 const CheckoutList = ({ list }) => {
   const totalPrice = list.reduce(
@@ -9,28 +14,38 @@ const CheckoutList = ({ list }) => {
     0
   );
   return (
-    <div className={classes.container}>
-      <Alert variant="warning" style={{ marginTop: "2rem" }}>
-        * Use the following test credit cart for payment *
+    <>
+      <Message color="yellow" style={{ width: "90%", margin: "2rem auto" }}>
+        * Use the following dummy credit card for payment test *
         <br />
         4242 4242 4242 4242 - Exp: future date - CVC: 123
-      </Alert>
-      <Card style={{ maxWidth: "500px", margin: "auto" }}>
-        <ListGroup>
-          {list.map((item) => (
-            <CheckoutItem item={item} key={item.id} />
-          ))}
-        </ListGroup>
-        <Card.Footer style={{ fontSize: "1.5rem", fontWeight: 500 }}>
-          <div className="d-flex justify-content-between">
-            <div>Total: ${totalPrice}</div>
-            <div>
-              <CheckoutButton price={totalPrice} />
-            </div>
-          </div>
-        </Card.Footer>
-      </Card>
-    </div>
+      </Message>
+      <CheckoutPageContainer>
+        <CheckoutHeaderContainer>
+          <HeaderBlockContainer>
+            <span>Image</span>
+          </HeaderBlockContainer>
+          <HeaderBlockContainer>
+            <span>Name</span>
+          </HeaderBlockContainer>
+          <HeaderBlockContainer>
+            <span>Quantity</span>
+          </HeaderBlockContainer>
+          <HeaderBlockContainer>
+            <span>Price</span>
+          </HeaderBlockContainer>
+          <HeaderBlockContainer>
+            <span>Remove</span>
+          </HeaderBlockContainer>
+        </CheckoutHeaderContainer>
+
+        {list.map((item) => (
+          <CheckoutItem item={item} key={item.id} />
+        ))}
+        <TotalContainer>Total: ${totalPrice}</TotalContainer>
+        <CheckoutButton price={totalPrice} />
+      </CheckoutPageContainer>
+    </>
   );
 };
 

@@ -2,9 +2,12 @@
   --font-poriet-one: "Poiret One", cursive;
   --font-spartan: "Spartan", sans-serif;
 }
+html {
+  font-size: 62.5%;
+}
 @media only screen and (max-width: 768px) {
   html {
-    font-size: 62.5%;
+    font-size: 50%;
   }
 }
 body {
