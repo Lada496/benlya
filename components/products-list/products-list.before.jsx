@@ -1,8 +1,6 @@
 import Message from "../ui/message";
 import RowContainer from "../ui/row-container";
 import ProductItem from "./product-item";
-import { Grid } from "semantic-ui-react";
-import { CardContainer } from "./products-list.styles";
 
 const ProductsList = ({ categoryObject }) => {
   if (!categoryObject) {
@@ -17,13 +15,11 @@ const ProductsList = ({ categoryObject }) => {
       {categoryObject.products.length === 0 && (
         <Message text="No items added yet!" />
       )}
-      <CardContainer>
-        <Grid>
-          {categoryObject.products.map((item) => (
-            <ProductItem key={item.id} item={item} />
-          ))}
-        </Grid>
-      </CardContainer>
+      <RowContainer>
+        {categoryObject.products.map((item) => (
+          <ProductItem key={item.id} item={item} />
+        ))}
+      </RowContainer>
     </>
   );
 };

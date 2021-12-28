@@ -1,9 +1,6 @@
 import Link from "next/link";
 import ProductItem from "../products-list/product-item";
 import RowContainer from "../ui/row-container";
-import { Grid } from "semantic-ui-react";
-import { CardContainer } from "../products-list/products-list.styles";
-import { LinkContainer } from "./shop-list.styles";
 
 const ShopList = ({ category }) => {
   const filteredList =
@@ -13,16 +10,22 @@ const ShopList = ({ category }) => {
   return (
     <>
       <h2 className="h2">{category.title}</h2>
-      <CardContainer>
-        <Grid>
-          {filteredList.map((item) => (
-            //   <ShopItem key={item.id} item={item} />
-            <ProductItem key={item.id} item={item} />
-          ))}
-        </Grid>
-      </CardContainer>
+      <RowContainer>
+        {filteredList.map((item) => (
+          //   <ShopItem key={item.id} item={item} />
+          <ProductItem key={item.id} item={item} />
+        ))}
+      </RowContainer>
       <Link href={`/shop/${category.path}`}>
-        <LinkContainer>view more</LinkContainer>
+        <a
+          style={{
+            textTransform: "uppercase",
+            textAlign: "center",
+            display: "block",
+          }}
+        >
+          Go to {category.title} page
+        </a>
       </Link>
     </>
   );
