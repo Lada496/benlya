@@ -44,7 +44,7 @@ const Header = ({ setVisible, visible }) => {
         inverted
       />
       <Link href="/">
-        <LogoContainer>BeOshare</LogoContainer>
+        <LogoContainer>BenLya</LogoContainer>
       </Link>
       <nav>
         <NavContainer>

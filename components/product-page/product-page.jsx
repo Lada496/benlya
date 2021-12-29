@@ -20,6 +20,8 @@ import {
   ButtonContainer,
 } from "./product-page.styles";
 
+import RatingContainer from "../ui/rating-container";
+
 const ProductPageComponent = ({ product }) => {
   const [session, loading] = useSession();
   const router = useRouter();
@@ -80,6 +82,11 @@ const ProductPageComponent = ({ product }) => {
         <Grid.Column mobile={16} tablet={8} computer={8}>
           <TitleContainer>{product.title}</TitleContainer>
           <TitleContainer>${product.price}</TitleContainer>
+          <RatingContainer
+            rate={product.rating.rate}
+            count={product.rating.count}
+            size="huge"
+          />
           <TextContainer>{product.description}</TextContainer>
 
           {!inCartlist && (
