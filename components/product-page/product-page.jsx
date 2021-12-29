@@ -86,6 +86,7 @@ const ProductPageComponent = ({ product }) => {
             rate={product.rating.rate}
             count={product.rating.count}
             size="huge"
+            position={true}
           />
           <TextContainer>{product.description}</TextContainer>
 
