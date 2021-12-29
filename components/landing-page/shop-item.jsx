@@ -1,23 +1,15 @@
-import { Card } from "react-bootstrap";
-import ColContainer from "../ui/col-container";
-import CardImgContainer from "../ui/card-img-container";
-import CardLinkContainer from "../ui/card-link-container";
-
+import Link from "next/link";
+import { Grid } from "semantic-ui-react";
+import { ShopItemContainer, LinkContainer } from "./shop-item.styles";
 const ShopItem = ({ item }) => {
   return (
-    <ColContainer>
-      <Card style={{ height: "31.5rem" }}>
-        <CardImgContainer imageUrl={item.imageUrl} />
-        <Card.Body>
-          <Card.Title
-            style={{ textTransform: "uppercase", textAlign: "center" }}
-          >
-            {item.title}
-          </Card.Title>
-          <CardLinkContainer link={`/shop/${item.path}`} />
-        </Card.Body>
-      </Card>
-    </ColContainer>
+    <Grid.Column mobile={16} tablet={8} computer={4}>
+      <ShopItemContainer imageUrl={item.imageUrl}>
+        <Link href={`/shop/${item.path}`}>
+          <LinkContainer>{item.title}</LinkContainer>
+        </Link>
+      </ShopItemContainer>
+    </Grid.Column>
   );
 };
 

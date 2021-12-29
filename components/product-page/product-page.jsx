@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/client";
-import { Row, Col, Card } from "react-bootstrap";
+import { Grid } from "semantic-ui-react";
 import {
   addItemToCartAction,
   clearItemFromCartAction,
@@ -11,7 +12,15 @@ import {
   addItemToWishlistAction,
   removeItemfromWishlistAction,
 } from "../../redux/wishlist/whishlist.actions";
-import ButtonContainer from "../ui/button-container";
+import {
+  ItemContainer,
+  ImageContainer,
+  TitleContainer,
+  TextContainer,
+  ButtonContainer,
+} from "./product-page.styles";
+
+import RatingContainer from "../ui/rating-container";
 
 const ProductPageComponent = ({ product }) => {
   const [session, loading] = useSession();
@@ -63,57 +72,64 @@ const ProductPageComponent = ({ product }) => {
   };
 
   return (
-    <>
-      <Card style={{ maxWidth: "95%", margin: "6rem auto", border: "none" }}>
-        <Row>
-          <Col md={6} xs={12}>
-            <Card.Img
-              src={product.image}
-              style={{ maxWidth: "25rem", display: "block", margin: "auto" }}
-            />
-          </Col>
-          <Col md={6} xs={12}>
-            <Card.Body>
-              <Card.Title>{product.title}</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">
-                ${product.price}
-              </Card.Subtitle>
-              <Card.Text>{product.description}</Card.Text>
+    <ItemContainer>
+      <Grid>
+        <Grid.Column mobile={16} tablet={8} computer={8}>
+          <ImageContainer>
+            <Image width={700} height={700} src={product.image} />
+          </ImageContainer>
+        </Grid.Column>
+        <Grid.Column mobile={16} tablet={8} computer={8}>
+          <TitleContainer>{product.title}</TitleContainer>
+          <TitleContainer>${product.price}</TitleContainer>
+          <RatingContainer
+            rate={product.rating.rate}
+            count={product.rating.count}
+            size="huge"
+            position={true}
+          />
+          <TextContainer>{product.description}</TextContainer>
 
-              {!inCartlist && (
-                <ButtonContainer
-                  text="Add to cart"
-                  clickHandler={addToCartHandler}
-                />
-              )}
-              {inCartlist && (
-                <ButtonContainer
-                  text="remove from cart"
-                  clickHandler={removeFromCartHandler}
-                />
-              )}
+          {!inCartlist && (
+            <ButtonContainer
+              color="black"
+              textColor="white"
+              onClick={addToCartHandler}
+            >
+              Add to cart
+            </ButtonContainer>
+          )}
+          {inCartlist && (
+            <ButtonContainer
+              color="black"
+              textColor="white"
+              onClick={removeFromCartHandler}
+            >
+              remove from cart
+            </ButtonContainer>
+          )}
 
-              {!inWishlist && (
-                <ButtonContainer
-                  text="Add to wishlist"
-                  clickHandler={addToWishlistHandler}
-                  styles={{ marginLeft: "0.5rem" }}
-                  varient="outline-primary"
-                />
-              )}
-              {inWishlist && (
-                <ButtonContainer
-                  text="remove from wishlist"
-                  clickHandler={removeFromWishlistHandker}
-                  styles={{ marginLeft: "0.5rem" }}
-                  varient="outline-primary"
-                />
-              )}
-            </Card.Body>
-          </Col>
-        </Row>
-      </Card>
-    </>
+          {!inWishlist && (
+            <ButtonContainer
+              onClick={addToWishlistHandler}
+              color="white"
+              textColor="black"
+            >
+              Add to wishlist
+            </ButtonContainer>
+          )}
+          {inWishlist && (
+            <ButtonContainer
+              color="white"
+              textColor="black"
+              onClick={removeFromWishlistHandker}
+            >
+              remove from wishlist
+            </ButtonContainer>
+          )}
+        </Grid.Column>
+      </Grid>
+    </ItemContainer>
   );
 };
 
