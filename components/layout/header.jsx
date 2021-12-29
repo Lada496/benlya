@@ -39,7 +39,7 @@ const Header = ({ setVisible, visible }) => {
     <HeaderContainer>
       <IconContainer
         onClick={showSidebarHandler}
-        name={visible ? "close" : "sidebar"}
+        name={visible ? "close" : "bars"}
         size="big"
         inverted
       />
