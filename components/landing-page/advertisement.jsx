@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Carousel, Image } from "react-bootstrap";
 import {
   SliderContainer,
   Slider,
-  SlideContainer,
   ImageContainer,
   TextContainer,
   DotsContainer,
@@ -48,11 +46,9 @@ const Advertisement = () => {
     <SliderContainer>
       <Slider style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
         {Ads.map((ad) => (
-          // <SlideContainer key={ad.id}>
           <ImageContainer key={ad.id} imageUrl={ad.imageUrl}>
             <TextContainer>{ad.text}</TextContainer>
           </ImageContainer>
-          // </SlideContainer>
         ))}
       </Slider>
       <DotsContainer>
