@@ -41,7 +41,7 @@ export const FormContainer = styled.form`
     border: none;
     margin: 2rem auto 0 auto;
     font-size: 1.2rem;
-    font-family: "Spartan", sans-serif;
+    font-family: var(--font-spartan);
     width: 7rem;
     border-radius: 4px;
     padding: 0.6rem 0.8rem 0.4rem 0.8rem;

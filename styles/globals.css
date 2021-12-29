@@ -2,8 +2,15 @@
   --font-poriet-one: "Poiret One", cursive;
   --font-spartan: "Spartan", sans-serif;
 }
+
 html {
+  box-sizing: border-box;
   font-size: 62.5%;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 @media only screen and (max-width: 768px) {
   html {
@@ -43,21 +50,6 @@ a {
   text-align: center;
   font-family: var(--font-spartan);
   font-size: 1.5rem;
-}
-
-footer {
-  /* margin-top: 3rem; */
-  text-align: center;
-  height: 3rem;
-  display: block;
-  color: white;
-  background-color: black;
-  position: relative;
-  font-family: var(--font-poriet-one);
-}
-
-footer p {
-  padding-top: 0.7rem;
 }
 
 .ui.segment {

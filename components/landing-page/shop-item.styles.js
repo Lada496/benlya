@@ -14,7 +14,7 @@ export const LinkContainer = styled.a`
   width: fit-content;
   height: fit-content;
   color: white;
-  font-family: "Spartan", sans-serif;
+  font-family: var(--font-spartan);
   font-size: 1.3rem;
   text-transform: uppercase;
   &:hover {

@@ -1,5 +1,4 @@
 import Message from "../ui/message";
-import RowContainer from "../ui/row-container";
 import ProductItem from "./product-item";
 import { Grid } from "semantic-ui-react";
 import { CardContainer } from "./products-list.styles";

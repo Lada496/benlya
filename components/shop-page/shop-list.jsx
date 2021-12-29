@@ -1,6 +1,5 @@
 import Link from "next/link";
 import ProductItem from "../products-list/product-item";
-import RowContainer from "../ui/row-container";
 import { Grid } from "semantic-ui-react";
 import { CardContainer } from "../products-list/products-list.styles";
 import { LinkContainer } from "./shop-list.styles";

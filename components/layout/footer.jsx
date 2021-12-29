@@ -1,10 +1,10 @@
-import React from "react";
+import { FooterContainer } from "./footer.styles";
 
 const Footer = () => {
   return (
-    <footer>
+    <FooterContainer>
       <p>&copy;BeOshare</p>
-    </footer>
+    </FooterContainer>
   );
 };
 

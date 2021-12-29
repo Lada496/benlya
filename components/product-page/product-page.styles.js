@@ -35,5 +35,5 @@ export const ButtonContainer = styled.button`
   height: 3rem;
   padding: 0.5rem auto;
   margin: 1rem auto;
-  font-family: "Spartan", sans-serif;
+  font-family: var(--font-spartan);
 `;

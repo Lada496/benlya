@@ -3,7 +3,6 @@ export const SliderContainer = styled.div`
   position: relative;
   margin: 0 auto;
   overflow: hidden;
-  //   max-width: 100%;
   height: 40vh;
   @media (max-width: 500px) {
     height: 80vh;
@@ -52,5 +51,5 @@ export const DotContainer = styled.div`
   border-radius: 50%;
   cursor: pointer;
   background-color: white;
-  opacity: ${(props) => (props.isActive ? 1 : 0.9)};
+  opacity: ${(props) => (props.isActive ? 1 : 0.8)};
 `;

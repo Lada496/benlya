@@ -12,7 +12,7 @@ export const ItemContainer = styled.div`
 
 export const TitleContainer = styled.h3`
   text-align: center;
-  font-family: "Spartan", sans-serif;
+  font-family: var(--font-spartan);
   font-weight: 400;
   max-width: 90%;
   margin: auto;
