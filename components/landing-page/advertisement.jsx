@@ -46,13 +46,13 @@ const Advertisement = () => {
   }, [index]);
   return (
     <SliderContainer>
-      <Slider style={{ transform: `translate3d(0, ${-index * 50}%, 0)` }}>
+      <Slider style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
         {Ads.map((ad) => (
-          <SliderContainer key={ad.id}>
-            <ImageContainer imageUrl={ad.imageUrl}>
-              <TextContainer>{ad.text}</TextContainer>
-            </ImageContainer>
-          </SliderContainer>
+          // <SlideContainer key={ad.id}>
+          <ImageContainer key={ad.id} imageUrl={ad.imageUrl}>
+            <TextContainer>{ad.text}</TextContainer>
+          </ImageContainer>
+          // </SlideContainer>
         ))}
       </Slider>
       <DotsContainer>
