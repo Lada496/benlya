@@ -69,3 +69,9 @@ a {
 .ui.grid > .column:not(.row) {
   padding: 0;
 }
+.ui.floating.label {
+  top: 0.5rem;
+  left: 97%;
+  font-family: var(--font-spartan);
+  padding: 0.7rem 0.7rem 0.3rem;
+}

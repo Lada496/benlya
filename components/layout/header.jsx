@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/client";
+import { Label } from "semantic-ui-react";
 import { resetCart } from "../../redux/cart/cart.actions";
 import { resetWishlist } from "../../redux/wishlist/whishlist.actions";
 import {
@@ -19,6 +20,7 @@ const updateWishlistHandler = async (wishlist) => {
 };
 const Header = ({ setVisible, visible }) => {
   const wishlist = useSelector((state) => state.wishlist.products);
+  const cartItems = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
   const [session, loading] = useSession();
   const logoutHandler = async () => {
@@ -62,7 +64,13 @@ const Header = ({ setVisible, visible }) => {
           )}
           <li>
             <Link href="/checkout">
-              <IconContainer name="shopping cart" size="large" inverted />
+              <IconContainer name="shopping cart" size="large" inverted>
+                {cartItems.length >= 1 && (
+                  <Label color="teal" floating>
+                    {cartItems.length}
+                  </Label>
+                )}
+              </IconContainer>
             </Link>
           </li>
         </NavContainer>

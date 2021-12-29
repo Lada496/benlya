@@ -30,6 +30,8 @@ export const IconContainer = styled(Icon)`
 
 export const NavContainer = styled.ul`
   display: flex;
+  justify-content: center;
   margin: auto;
   gap: 0.5rem;
+  padding: 0;
 `;
