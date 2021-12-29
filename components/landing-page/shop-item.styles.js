@@ -3,6 +3,12 @@ import styled from "styled-components";
 export const ShopItemContainer = styled.div`
   background: center / cover no-repeat url(${(props) => props.imageUrl});
   height: 80vh;
+  @media (max-width: 1024px) {
+    height: 55vh;
+  }
+  @media (max-width: 767px) {
+    height: 80vh;
+  }
 `;
 
 export const LinkContainer = styled.a`
