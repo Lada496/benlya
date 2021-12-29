@@ -3,7 +3,7 @@ export const SliderContainer = styled.div`
   position: relative;
   margin: 0 auto;
   overflow: hidden;
-  max-width: 100%;
+  //   max-width: 100%;
   height: 40vh;
   @media (max-width: 500px) {
     height: 80vh;
@@ -12,7 +12,6 @@ export const SliderContainer = styled.div`
 export const Slider = styled.div`
   white-space: nowrap;
   transition: ease 1000ms;
-  transform3d: (${(props) => props.index}%, 0, 0);
 `;
 
 export const ImageContainer = styled.div`
@@ -21,15 +20,19 @@ export const ImageContainer = styled.div`
   background: center / cover no-repeat url(${(props) => props.imageUrl});
 `;
 export const SlideContainer = styled.div`
-  //   display: inline-block;
+  display: inline-block;
   width: 100%;
   height: 100%;
 `;
 
 export const TextContainer = styled.h2`
   display: block;
+  width: fit-content;
   padding: 0.5rem 1rem;
-  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: #999;
   color: white;
   font-weight: 600;
@@ -50,5 +53,5 @@ export const DotContainer = styled.div`
   border-radius: 50%;
   cursor: pointer;
   background-color: white;
-  opacity: ${(props) => (props.isActive ? 1 : 0)};
+  opacity: ${(props) => (props.isActive ? 1 : 0.9)};
 `;

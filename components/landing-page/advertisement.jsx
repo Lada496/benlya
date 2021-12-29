@@ -46,10 +46,7 @@ const Advertisement = () => {
   }, [index]);
   return (
     <SliderContainer>
-      <Slider
-        index={-index * 100}
-        style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
-      >
+      <Slider style={{ transform: `translate3d(0, ${-index * 50}%, 0)` }}>
         {Ads.map((ad) => (
           <SliderContainer key={ad.id}>
             <ImageContainer imageUrl={ad.imageUrl}>
