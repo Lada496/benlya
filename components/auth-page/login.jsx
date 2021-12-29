@@ -29,7 +29,6 @@ const Login = ({ setIsLogin }) => {
         email: data.email,
         password: data.password,
       });
-      console.log(result);
       if (!result.error) {
         let path = "/";
         router.replace(path);
