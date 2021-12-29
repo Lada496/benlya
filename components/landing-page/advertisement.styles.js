@@ -26,7 +26,7 @@ export const ImageContainer = styled.div`
 export const TextContainer = styled.h2`
   display: block;
   width: fit-content;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 3rem;
   position: absolute;
   top: 50%;
   left: 50%;
