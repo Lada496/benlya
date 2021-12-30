@@ -1,12 +1,18 @@
 import { useDispatch } from "react-redux";
 import Image from "next/image";
-import { Row, Col, ListGroupItem } from "react-bootstrap";
+import { Icon } from "semantic-ui-react";
 import {
   removeItemFromCartAction,
   addItemToCartAction,
   clearItemFromCartAction,
 } from "../../redux/cart/cart.actions";
-import classes from "./checkout-item.module.css";
+import {
+  CheckoutItemContainer,
+  ImageContainer,
+  TextContainer,
+  QuantityContainer,
+  RemoveButtonContainer,
+} from "./checkout-item.styles";
 
 const CheckoutItem = ({ item }) => {
   const dispatch = useDispatch();
@@ -21,41 +27,21 @@ const CheckoutItem = ({ item }) => {
   };
 
   return (
-    <ListGroupItem className={classes.row}>
-      <Row style={{ padding: "1rem" }} className="align-items-center">
-        <Col xs={3}>
-          <div className={classes.img}>
-            <Image src={item.image} alt={item.title} width={200} height={200} />
-            {/* <img src={item.image} alt={item.title} /> */}
-          </div>
-        </Col>
-        <Col xs={9}>
-          <Row>
-            <Col xs={10}>
-              <h3>${item.price}</h3>
-            </Col>
-            <Col
-              xs={2}
-              style={{ fontSize: "1.5rem", padding: "0 1rem" }}
-              onClick={clearItemHandler}
-            >
-              <span className={classes.hover}>&#10005;</span>
-            </Col>
-          </Row>
-
-          <h4>{item.title}</h4>
-          <Row xs="auto">
-            <Col onClick={removeItemHandler}>
-              <span className={classes.hover}>&#8722;</span>
-            </Col>
-            <Col>{item.quantity}</Col>
-            <Col onClick={addItemHandler}>
-              <span className={classes.hover}>&#43;</span>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
-    </ListGroupItem>
+    <CheckoutItemContainer>
+      <ImageContainer>
+        <Image src={item.image} alt={item.title} width={200} height={200} />
+      </ImageContainer>
+      <TextContainer>{item.title}</TextContainer>
+      <QuantityContainer>
+        <div onClick={removeItemHandler}>&#10094;</div>
+        <span>{item.quantity}</span>
+        <div onClick={addItemHandler}>&#10095;</div>
+      </QuantityContainer>
+      <TextContainer>${item.price}</TextContainer>
+      <RemoveButtonContainer onClick={clearItemHandler}>
+        <Icon name="trash" size="large" />
+      </RemoveButtonContainer>
+    </CheckoutItemContainer>
   );
 };
 

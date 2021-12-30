@@ -1,12 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/client";
-import { Navbar, Container, Nav, Button, NavDropdown } from "react-bootstrap";
+import { Label } from "semantic-ui-react";
 import { resetCart } from "../../redux/cart/cart.actions";
 import { resetWishlist } from "../../redux/wishlist/whishlist.actions";
-import classes from "./header.module.css";
-import DropdownItem from "./dropdown-item";
-
+import {
+  HeaderContainer,
+  LogoContainer,
+  NavContainer,
+  IconContainer,
+} from "./header.styles";
 const updateWishlistHandler = async (wishlist) => {
   const resposnse = await fetch("/api/whishlist", {
     method: "PATCH",
@@ -15,10 +18,9 @@ const updateWishlistHandler = async (wishlist) => {
   });
   const data = await resposnse.json();
 };
-
-const Header = () => {
-  const categories = useSelector((state) => state.categories.categories);
+const Header = ({ setVisible, visible }) => {
   const wishlist = useSelector((state) => state.wishlist.products);
+  const cartItems = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
   const [session, loading] = useSession();
   const logoutHandler = async () => {
@@ -32,64 +34,48 @@ const Header = () => {
     dispatch(resetCart());
     dispatch(resetWishlist());
   };
+  const showSidebarHandler = () => {
+    setVisible(true);
+  };
   return (
-    <header className={classes.nav}>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand>
-            <Link href="/">
-              <a style={{ textDecoration: "none", color: "white" }}>E-SHOP</a>
+    <HeaderContainer>
+      <IconContainer
+        onClick={showSidebarHandler}
+        name={visible ? "close" : "bars"}
+        size="big"
+        inverted
+      />
+      <Link href="/">
+        <LogoContainer>BenLya</LogoContainer>
+      </Link>
+      <nav>
+        <NavContainer>
+          {!session && !loading && (
+            <li>
+              <Link href="/auth">
+                <IconContainer name="user" size="large" inverted />
+              </Link>
+            </li>
+          )}
+          {session && (
+            <li onClick={logoutHandler}>
+              <IconContainer name="sign-out" size="large" inverted />
+            </li>
+          )}
+          <li>
+            <Link href="/checkout">
+              <IconContainer name="shopping cart" size="large" inverted>
+                {cartItems.length >= 1 && (
+                  <Label color="teal" floating>
+                    {cartItems.length}
+                  </Label>
+                )}
+              </IconContainer>
             </Link>
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav
-              style={{
-                display: "flex",
-                gap: "1rem",
-                alignItems: "center",
-              }}
-            >
-              {categories.length === 0 ? (
-                <Link href="/shop">Shop</Link>
-              ) : (
-                <NavDropdown title="Shop" id="navbarScrollingDropdown">
-                  <Link href="/shop">
-                    <a
-                      style={{
-                        color: "#212529",
-                        paddingLeft: "0.5rem",
-                        display: "block",
-                      }}
-                    >
-                      Preview
-                    </a>
-                  </Link>
-                  <NavDropdown.Divider />
-                  {categories.map((category, index) => (
-                    <DropdownItem
-                      category={category}
-                      key={index}
-                      index={index}
-                      length={categories.length}
-                    />
-                  ))}
-                </NavDropdown>
-              )}
-
-              {!session && !loading && <Link href="/auth">Login</Link>}
-              <Link href="/user">Wishlist</Link>
-              <Link href="/checkout">Checkout</Link>
-              {session && (
-                <Button onClick={logoutHandler} variant="outline-light">
-                  Logout
-                </Button>
-              )}
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </header>
+          </li>
+        </NavContainer>
+      </nav>
+    </HeaderContainer>
   );
 };
 

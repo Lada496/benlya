@@ -1,27 +1,30 @@
 import { withRouter } from "next/router";
-import { Card } from "react-bootstrap";
+import Link from "next/link";
 import { pathFinder } from "../../lib/categories-utils";
-import ColContainer from "../ui/col-container";
-import CardImgContainer from "../ui/card-img-container";
-import CardLinkContainer from "../ui/card-link-container";
+import { Grid } from "semantic-ui-react";
+import {
+  ItemContainer,
+  TitleContainer,
+  PriceContainer,
+  RatingContainer,
+} from "./product-item.styles.js";
+import Rating from "../ui/rating-container";
 
 const ProductItem = ({ item }) => {
   const categoryPath = pathFinder(item.category);
   return (
-    <ColContainer>
-      <Card style={{ height: "24rem", padding: "1rem 0.5rem" }}>
-        <CardImgContainer
-          imageUrl={item.image}
-          objectFit="contain"
-          height="10rem"
-        />
-        <Card.Body>
-          <Card.Title style={{ fontSize: "1rem" }}>{item.title}</Card.Title>
-          <Card.Text>${item.price}</Card.Text>
-          <CardLinkContainer link={`/shop/${categoryPath}/${item.id}`} />
-        </Card.Body>
-      </Card>
-    </ColContainer>
+    <Grid.Column mobile={16} tablet={8} computer={4}>
+      <Link href={`/shop/${categoryPath}/${item.id}`}>
+        <ItemContainer imageUrl={item.image}></ItemContainer>
+      </Link>
+      <TitleContainer>{item.title}</TitleContainer>
+      <PriceContainer>${item.price}</PriceContainer>
+      <Rating rate={item.rating.rate} count={item.rating.count} />
+      {/* <RatingContainer>
+        <Rating defaultRating={item.rating.rate} maxRating={5} />
+        <p>({item.rating.count})</p>
+      </RatingContainer> */}
+    </Grid.Column>
   );
 };
 

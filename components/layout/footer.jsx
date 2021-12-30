@@ -1,10 +1,10 @@
-import React from "react";
+import { FooterContainer } from "./footer.styles";
 
 const Footer = () => {
   return (
-    <footer>
-      <p>&copy;E-SHOP</p>
-    </footer>
+    <FooterContainer>
+      <p>&copy;BenLya</p>
+    </FooterContainer>
   );
 };
 

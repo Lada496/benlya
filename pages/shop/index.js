@@ -42,7 +42,7 @@ const ShopPage = () => {
         <title>Shop</title>
         <meta name="description" content="Categories List" />
       </Head>
-      <h1>Preview</h1>
+      <h1 className="h1">Preview</h1>
       {list.map((category) => (
         <ShopList key={category.id} category={category} />
       ))}

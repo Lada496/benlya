@@ -1,7 +1,7 @@
-import classes from "./no-item-message.module.css";
+import { TextContainer } from "./message.styles";
 
 const Message = ({ text }) => {
-  return <p className={classes.text}>{text}</p>;
+  return <TextContainer>{text}</TextContainer>;
 };
 
 export default Message;
