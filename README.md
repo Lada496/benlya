@@ -1,12 +1,12 @@
 # Main Updates
 
-- **title change**
-  before: e-shop
+- **title change**\
+  before: e-shop\
   after: BenLya
-- **libraries change**
-  before: React bootstrap
+- **libraries change**\
+  before: React bootstrap\
   after: Semantic UI React, styled component
-- **styles change**
+- **styles change**\
   added some custom styles by using styled component
-- **others**
+- **others**\
   fixed some minor bugs
