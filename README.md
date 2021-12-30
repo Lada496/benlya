@@ -2,7 +2,7 @@
 
 ## Description
 
-ecommerce website with dummy data ([Demo](https://e-shop-taupe.vercel.app))
+ecommerce website with dummy data ([Demo](https://e-shop-31s5krmlj-lada496.vercel.app/))
 
 ## Purpose
 
