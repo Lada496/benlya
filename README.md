@@ -1,17 +1,11 @@
-# e-shop
-
 ## Description
 
-ecommerce wibsite with dummy data ([Demo](https://e-shop-taupe.vercel.app))
+ecommerce website with dummy data ([Demo](https://e-shop-taupe.vercel.app))
 
 ## Purpose
 
 - deepen my understanding of classical redux by using redux and related libraries such as redux-thunk and redux-persist
-- try to use Next.js
-
-## The reason why I choose this project
-
-I wanted to re-create ecommerce website with different libraries and database from class rectures
+- try using Next.js and Semantic UI React
 
 ## Reference
 
@@ -27,14 +21,5 @@ I wanted to re-create ecommerce website with different libraries and database fr
 - Data managiment: Redux, Redux Thunk, Redux Persist, next-redux-wrapper
 - Dammy data: [FakeStoreAPI](https://fakestoreapi.com/docs), uuid
 - Database: MongoDB
-- Styling: React Bootstrap
+- Styling: Semantic UI React, styled component
 - Others: axios, React Hook Form
-
-## What I learned
-
-- Some Next.js features such as SSR
-- How to use redux without redux-toolkit
-
-## What was the most challenging part
-
-Orchestrate Next.js and Redux especially using redux-persist was hard.
