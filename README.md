@@ -2,12 +2,12 @@
 
 ## Description
 
-ecommerce wibsite with dummy data ([Demo](https://e-shop-taupe.vercel.app))
+ecommerce website with dummy data ([Demo](https://e-shop-taupe.vercel.app))
 
 ## Purpose
 
 - deepen my understanding of classical redux by using redux and related libraries such as redux-thunk and redux-persist
-- try to use Next.js
+- try using Next.js
 
 ## The reason why I choose this project
 
