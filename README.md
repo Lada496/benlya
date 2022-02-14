@@ -8,7 +8,7 @@ ecommerce website with dummy data ([Demo](https://e-shop-taupe.vercel.app))
 - try using Next.js and Semantic UI React
 
 ## Challenging parts
-- Orchestrate Next.js and Redux especially using redux-persist
+- Understand Next.js specific behavior: For example, orchestrating Next.js and Redux especially using redux-persist. I refered these two coding examples([nextjs-with-redux-thunk](https://github.com/vercel/next.js/tree/canary/examples/with-redux-thunk), [nextjs-with-redux-wrapper-redux-persist](https://github.com/fazlulkarimweb/with-next-redux-wrapper-redux-persist)). In addition, I refered [this stackoverflow topic](https://stackoverflow.com/questions/65383169/vercel-next-js-environment-variable-not-working/65746862#65746862) to deal with environment-variable in Next.js app.
 
 ## Screenshots
 <img width="509" alt="Screen Shot 2022-01-04 at 21 37 20" src="https://user-images.githubusercontent.com/67321065/148165971-1da47cd1-836f-40cc-bc57-872264710eca.png">
