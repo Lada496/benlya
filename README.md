@@ -7,6 +7,9 @@ ecommerce website with dummy data ([Demo](https://e-shop-taupe.vercel.app))
 - deepen my understanding of classical redux by using redux and related libraries such as redux-thunk and redux-persist
 - try using Next.js and Semantic UI React
 
+## Challenging parts
+- Orchestrate Next.js and Redux especially using redux-persist
+
 ## Screenshots
 <img width="509" alt="Screen Shot 2022-01-04 at 21 37 20" src="https://user-images.githubusercontent.com/67321065/148165971-1da47cd1-836f-40cc-bc57-872264710eca.png">
 <img width="511" alt="Screen Shot 2022-01-04 at 21 31 29" src="https://user-images.githubusercontent.com/67321065/148166002-bf98883f-2ede-44b2-a799-c23cd359241e.png">
