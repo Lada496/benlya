@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { Segment, Sidebar } from "semantic-ui-react";
 import Footer from "./footer";
 import Header from "./header";
@@ -6,13 +7,12 @@ import SliderNav from "./slider-nav";
 
 const Layout = ({ children }) => {
   const [visible, setVisible] = useState(false);
-  const segmentStyle = {
-    margin: "0",
-    boxShadow: "none !important",
-    border: "none",
-    padding: "0",
-    borderRadius: "0",
-  };
+  const router = useRouter();
+
+  useEffect(() => {
+    setVisible(false);
+  }, [router.asPath]);
+
   return (
     <>
       <Header setVisible={setVisible} visible={visible} />
