@@ -1,5 +1,6 @@
+"use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import Message from "../ui/message";
 import { createUser } from "../../lib/auth-utils";
@@ -27,7 +28,6 @@ const SignUp = ({ setIsLogin }) => {
     setSignupError(null);
     try {
       const result = await createUser(data.email, data.password1);
-      // console.log(result);
       let path = "/";
       router.replace(path);
     } catch (error) {

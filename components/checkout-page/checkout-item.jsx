@@ -1,11 +1,13 @@
-import { useDispatch } from "react-redux";
+"use client";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
 import { Icon } from "semantic-ui-react";
+
 import {
-  removeItemFromCartAction,
-  addItemToCartAction,
-  clearItemFromCartAction,
-} from "../../redux/cart/cart.actions";
+  addCartItem,
+  removeCartItemOne,
+  removeCartItemAll,
+} from "../../redux/slice/cart/cart.slice";
 import {
   CheckoutItemContainer,
   ImageContainer,
@@ -17,19 +19,25 @@ import {
 const CheckoutItem = ({ item }) => {
   const dispatch = useDispatch();
   const addItemHandler = () => {
-    dispatch(addItemToCartAction(item));
+    dispatch(addCartItem(item));
   };
   const removeItemHandler = () => {
-    dispatch(removeItemFromCartAction(item));
+    dispatch(removeCartItemOne(item));
   };
   const clearItemHandler = () => {
-    dispatch(clearItemFromCartAction(item));
+    dispatch(removeCartItemAll(item));
   };
 
   return (
     <CheckoutItemContainer>
       <ImageContainer>
-        <Image src={item.image} alt={item.title} width={200} height={200} />
+        <Image
+          src={item.image}
+          alt={item.title}
+          width={200}
+          height={200}
+          priority={false}
+        />
       </ImageContainer>
       <TextContainer>{item.title}</TextContainer>
       <QuantityContainer>

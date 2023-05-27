@@ -1,3 +1,4 @@
+"use client";
 import styled from "styled-components";
 export const ItemContainer = styled.div`
   margin: 6rem auto;
@@ -11,7 +12,9 @@ export const ItemContainer = styled.div`
 `;
 export const ImageContainer = styled.div`
   width: 90%;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0 auto 2rem auto;
 `;
 export const TitleContainer = styled.h3`

@@ -1,38 +1,25 @@
+"use client";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
-import { useSession, signOut } from "next-auth/client";
+import { useSession, signOut } from "next-auth/react";
 import { Label } from "semantic-ui-react";
-import { resetCart } from "../../redux/cart/cart.actions";
-import { resetWishlist } from "../../redux/wishlist/whishlist.actions";
+import { resetCart } from "../../redux/slice/cart/cart.slice";
+// import { resetWishlist } from "../../redux/wishlist/whishlist.actions";
 import {
   HeaderContainer,
   LogoContainer,
   NavContainer,
   IconContainer,
 } from "./header.styles";
-const updateWishlistHandler = async (wishlist) => {
-  const resposnse = await fetch("/api/whishlist", {
-    method: "PATCH",
-    body: JSON.stringify({ wishlist }),
-    headers: { "Content-Type": "application/json" },
-  });
-  const data = await resposnse.json();
-};
-const Header = ({ setVisible, visible }) => {
-  const wishlist = useSelector((state) => state.wishlist.products);
-  const cartItems = useSelector((state) => state.cart.cartItems);
-  const dispatch = useDispatch();
-  const [session, loading] = useSession();
-  const logoutHandler = async () => {
-    try {
-      await updateWishlistHandler(wishlist);
-    } catch (error) {
-      alert("Failed to upload wishlist!");
-    }
 
+const Header = ({ setVisible, visible }) => {
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
+  const { data: session, status } = useSession();
+  const logoutHandler = async () => {
     await signOut({ redirect: false });
     dispatch(resetCart());
-    dispatch(resetWishlist());
   };
   const showSidebarHandler = () => {
     setVisible(true);
@@ -45,12 +32,10 @@ const Header = ({ setVisible, visible }) => {
         size="big"
         inverted
       />
-      <Link href="/">
-        <LogoContainer>BenLya</LogoContainer>
-      </Link>
+      <LogoContainer href="/">BenLya</LogoContainer>
       <nav>
         <NavContainer>
-          {!session && !loading && (
+          {!session && !status.loading && (
             <li>
               <Link href="/auth">
                 <IconContainer name="user" size="large" inverted />
