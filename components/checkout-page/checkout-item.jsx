@@ -1,11 +1,12 @@
-import { useDispatch } from "react-redux";
+"use client";
 import Image from "next/image";
 import { Icon } from "semantic-ui-react";
+
 import {
-  removeItemFromCartAction,
-  addItemToCartAction,
-  clearItemFromCartAction,
-} from "../../redux/cart/cart.actions";
+  useAddCartItemMutation,
+  useRemoveCartItemOneMutation,
+  useRemoveCartItemsAllMutation,
+} from "../../redux/api/cart/cart.api";
 import {
   CheckoutItemContainer,
   ImageContainer,
@@ -15,21 +16,31 @@ import {
 } from "./checkout-item.styles";
 
 const CheckoutItem = ({ item }) => {
-  const dispatch = useDispatch();
-  const addItemHandler = () => {
-    dispatch(addItemToCartAction(item));
+  const [addCartItem] = useAddCartItemMutation();
+  const [removeCartItemOne] = useRemoveCartItemOneMutation();
+  const [removeCartItemAll] = useRemoveCartItemsAllMutation();
+
+  const addItemHandler = async () => {
+    await addCartItem({ cartItemToAdd: item });
   };
-  const removeItemHandler = () => {
-    dispatch(removeItemFromCartAction(item));
+  const removeItemHandler = async () => {
+    await removeCartItemOne({ cartItemToRemove: item });
   };
-  const clearItemHandler = () => {
-    dispatch(clearItemFromCartAction(item));
+
+  const clearItemHandler = async () => {
+    await removeCartItemAll({ cartItemToRemove: item });
   };
 
   return (
     <CheckoutItemContainer>
       <ImageContainer>
-        <Image src={item.image} alt={item.title} width={200} height={200} />
+        <Image
+          src={item.image}
+          alt={item.title}
+          width={200}
+          height={200}
+          priority={false}
+        />
       </ImageContainer>
       <TextContainer>{item.title}</TextContainer>
       <QuantityContainer>

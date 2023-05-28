@@ -1,6 +1,7 @@
+"use client";
 import { useState } from "react";
-import { useRouter } from "next/router";
-import { signIn } from "next-auth/client";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import Message from "../ui/message";
 import { CardContainer, FormContainer, LinkContainer } from "./form.styles";

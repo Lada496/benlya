@@ -5,7 +5,6 @@ async function handler(req, res) {
     return;
   }
   const data = req.body;
-  console.log(data);
 
   const { email, password } = data;
   if (

@@ -1,6 +1,8 @@
+"use client";
 import styled from "styled-components";
+import Link from "next/link";
 
-export const LinkContainer = styled.a`
+export const LinkContainer = styled(Link)`
   display: block;
   color: black;
   text-transform: uppercase;

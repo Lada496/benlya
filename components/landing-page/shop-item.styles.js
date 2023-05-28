@@ -1,4 +1,6 @@
+"use client";
 import styled from "styled-components";
+import Link from "next/link";
 
 export const ShopItemContainer = styled.div`
   background: center / cover no-repeat url(${(props) => props.imageUrl});
@@ -11,7 +13,7 @@ export const ShopItemContainer = styled.div`
   }
 `;
 
-export const LinkContainer = styled.a`
+export const LinkContainer = styled(Link)`
   display: block;
   position: absolute;
   left: 50%;

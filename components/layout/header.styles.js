@@ -1,5 +1,7 @@
+"use client";
 import styled from "styled-components";
 import { Icon } from "semantic-ui-react";
+import Link from "next/link";
 
 export const HeaderContainer = styled.header`
   background-color: black;
@@ -9,7 +11,7 @@ export const HeaderContainer = styled.header`
   align-items: center;
 `;
 
-export const LogoContainer = styled.a`
+export const LogoContainer = styled(Link)`
   font-family: "Italiana", serif;
   font-size: 2.5rem;
   color: white;

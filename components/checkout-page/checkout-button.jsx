@@ -1,28 +1,29 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+"use client";
+import { useDispatch } from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
-import { resetCart } from "../../redux/cart/cart.actions";
-import { removeItemfromWishlistAction } from "../../redux/wishlist/whishlist.actions";
+import { useResetWishlistMutation } from "../../redux/api/wishlist/wishlist.api";
+import {
+  useResetCartMutation,
+  startRefechCartItems,
+} from "../../redux/api/cart/cart.api";
 
 const CheckoutButton = ({ price }) => {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const [resetCart] = useResetCartMutation();
+  const [resetWishlist] = useResetWishlistMutation();
+
   const priceForStripe = price * 100;
   const publishableKey = process.env.stripe_key;
-  const onToken = (token) => {
-    dispatch(resetCart());
-
-    // delete purchased items from wishlist
-    for (const item of cartItems) {
-      dispatch(removeItemfromWishlistAction(item));
-    }
+  const onToken = async (token) => {
+    await resetCart();
+    await resetWishlist();
+    dispatch(startRefechCartItems());
     alert("Payment Successful");
   };
   return (
     <StripeCheckout
       label="CHECKOUT"
       name="E-SHOP"
-      //   image={brandLogo}
       description={`Your total price is $${price}`}
       amount={priceForStripe}
       token={onToken}

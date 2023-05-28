@@ -1,17 +1,21 @@
+"use client";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { useSession } from "next-auth/client";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { Grid } from "semantic-ui-react";
+
 import {
-  addItemToCartAction,
-  clearItemFromCartAction,
-} from "../../redux/cart/cart.actions";
+  useGetCartItemsQuery,
+  useAddCartItemMutation,
+  useRemoveCartItemsAllMutation,
+} from "../../redux/api/cart/cart.api";
+
 import {
-  addItemToWishlistAction,
-  removeItemfromWishlistAction,
-} from "../../redux/wishlist/whishlist.actions";
+  useGetWishlistQuery,
+  useAddWishlistItemMutation,
+  useDeleteWishlistItemMutation,
+} from "../../redux/api/wishlist/wishlist.api";
 import {
   ItemContainer,
   ImageContainer,
@@ -21,62 +25,79 @@ import {
 } from "./product-page.styles";
 
 import RatingContainer from "../ui/rating-container";
+import Message from "../ui/message";
+import Loading from "../../app/shop/[category]/[productId]/loading";
 
 const ProductPageComponent = ({ product }) => {
-  const [session, loading] = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
-  const wishlist = useSelector((state) => state.wishlist.products);
-  const cartItems = useSelector((state) => state.cart.cartItems);
-  const isIncluded = (item) => item.id === product.id;
-  const [inWishlist, setInWishlist] = useState(wishlist.some(isIncluded));
-  const [inCartlist, setInCartlist] = useState(cartItems.some(isIncluded));
+  const { data: cart } = useGetCartItemsQuery();
+  const cartItems = cart?.cartItems;
+  const isIncluded = (item) => item?.id === product.id;
+  const [inWishlist, setInWishlist] = useState(false);
+  const [inCartlist, setInCartlist] = useState(false);
+  const { data, error, isFetching } = useGetWishlistQuery();
+  const [addWishlistItem] = useAddWishlistItemMutation();
+  const [deleteWishlistItem] = useDeleteWishlistItemMutation();
+  const [addCartItem] = useAddCartItemMutation();
+  const [removeCartItemAll] = useRemoveCartItemsAllMutation();
+
+  const wishlist = data?.products;
   useEffect(() => {
-    setInWishlist(wishlist.some(isIncluded));
+    setInWishlist(wishlist?.some(isIncluded));
   }, [wishlist]);
 
   useEffect(() => {
-    setInCartlist(cartItems.some(isIncluded));
-  });
+    setInCartlist(cartItems?.some(isIncluded));
+  }, [cartItems]);
 
-  const dispatch = useDispatch();
-  const addToCartHandler = () => {
-    if (!session && !loading) {
+  const addToCartHandler = async () => {
+    if (!session && !status.loading) {
       router.push("/auth");
       return;
     }
-    dispatch(addItemToCartAction(product));
+    await addCartItem({ cartItemToAdd: product });
   };
 
-  const removeFromCartHandler = () => {
-    if (!session && !loading) {
+  const removeFromCartHandler = async () => {
+    if (!session && !status.loading) {
       router.push("/auth");
       return;
     }
-    dispatch(clearItemFromCartAction(product));
+    await removeCartItemAll({ cartItemToRemove: product });
   };
 
-  const addToWishlistHandler = () => {
-    if (!session && !loading) {
+  const addToWishlistHandler = async () => {
+    if (!session && !status.loading) {
       router.push("/auth");
       return;
     }
-    dispatch(addItemToWishlistAction(product));
+    await addWishlistItem({ wishlist: product });
   };
 
-  const removeFromWishlistHandker = () => {
-    if (!session && !loading) {
+  const removeFromWishlistHandker = async () => {
+    if (!session && !status.loading) {
       router.push("/auth");
       return;
     }
-    dispatch(removeItemfromWishlistAction(product));
+    await deleteWishlistItem({ productId: product.id });
   };
+
+  if (error) return <Message text="⚠️ Failed to fetch data" />;
+  if (isFetching) return <Loading />;
 
   return (
     <ItemContainer>
-      <Grid>
+      <Grid verticalAlign="middle">
         <Grid.Column mobile={16} tablet={8} computer={8}>
           <ImageContainer>
-            <Image width={700} height={700} src={product.image} />
+            <Image
+              width={500}
+              height={500}
+              src={product.image}
+              alt={product.title}
+              priority={false}
+            />
           </ImageContainer>
         </Grid.Column>
         <Grid.Column mobile={16} tablet={8} computer={8}>

@@ -1,5 +1,6 @@
+"use client";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import { Segment, Sidebar } from "semantic-ui-react";
 import Footer from "./footer";
 import Header from "./header";
@@ -7,11 +8,11 @@ import SliderNav from "./slider-nav";
 
 const Layout = ({ children }) => {
   const [visible, setVisible] = useState(false);
-  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     setVisible(false);
-  }, [router.asPath]);
+  }, [pathname]);
 
   return (
     <>
