@@ -1,8 +1,5 @@
 import { Suspense } from "react";
+import Loading from "./loading";
 export default function ProductLayout({ children }) {
-  return (
-    <Suspense fallback={<div>Product Page Loading...</div>}>
-      {children}
-    </Suspense>
-  );
+  return <Suspense fallback={<Loading />}>{children}</Suspense>;
 }

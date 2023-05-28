@@ -10,7 +10,7 @@ const LandingPage = () => {
   const { data, error, isLoading } = useGetCategoriesQuery();
 
   if (isLoading) {
-    return <Message text="Landing page Loading..." />;
+    return <Message text="Loading..." />;
   }
   if (error) {
     return <Message text="Shop data fetch failed" />;

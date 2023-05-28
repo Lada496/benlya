@@ -25,6 +25,8 @@ import {
 } from "./product-page.styles";
 
 import RatingContainer from "../ui/rating-container";
+import Message from "../ui/message";
+import Loading from "../../app/shop/[category]/[productId]/loading";
 
 const ProductPageComponent = ({ product }) => {
   const { data: session, status } = useSession();
@@ -55,7 +57,6 @@ const ProductPageComponent = ({ product }) => {
       return;
     }
     await addCartItem({ cartItemToAdd: product });
-    // dispatch(addCartItem(product));
   };
 
   const removeFromCartHandler = async () => {
@@ -63,7 +64,6 @@ const ProductPageComponent = ({ product }) => {
       router.push("/auth");
       return;
     }
-    // dispatch(removeCartItemAll(product));
     await removeCartItemAll({ cartItemToRemove: product });
   };
 
@@ -82,9 +82,9 @@ const ProductPageComponent = ({ product }) => {
     }
     await deleteWishlistItem({ productId: product.id });
   };
-  if (error || isFetching) {
-    return <div>Wait</div>;
-  }
+
+  if (error) return <Message text="⚠️ Failed to fetch data" />;
+  if (isFetching) return <Loading />;
 
   return (
     <ItemContainer>

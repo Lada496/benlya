@@ -5,14 +5,6 @@ import ProductsList from "../../../components/products-list/products-list";
 import usePathnameArray from "../../../client/hooks/use-pathname-array";
 import Message from "../../../components/ui/message";
 
-// export function generateMetadata({ params }) {
-//   const category = params.category;
-//   return {
-//     title: `${category} | Shop by Category`,
-//     description: `Products list categorized by ${category}`,
-//   };
-// }
-
 const CategoryPage = () => {
   const { data: categories, error, isFetching } = useGetCategoriesQuery();
   const pathnameArray = usePathnameArray();

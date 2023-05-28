@@ -5,11 +5,6 @@ import ShopList from "../../components/shop-page/shop-list";
 import Message from "../../components/ui/message";
 import { useGetCategoriesQuery } from "../../redux/api/shop/shop.api";
 
-// export const metadata = {
-//   title: Shop,
-//   description: "Categories List",
-// };
-
 const ShopPage = () => {
   const { data, error, isLoading } = useGetCategoriesQuery();
   if (isLoading) {

@@ -23,7 +23,6 @@ const ChackoutPage = () => {
 
   useEffect(() => {
     if (data.refetch) {
-      console.log("run");
       refetch();
     }
   }, [data?.refetch]);
@@ -39,7 +38,7 @@ const ChackoutPage = () => {
     <>
       <h1 className="h1">Checkout</h1>
       {error && <Message text="⚠️ Cart items fetch failed" />}
-      {isFetching && <Message text="loading" />}
+      {isFetching && <Message text="Loading" />}
       {(!data || cartItems.length === 0) && (
         <Message text="No items added yet!" />
       )}

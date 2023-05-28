@@ -9,7 +9,22 @@ const SliderNav = ({ visible, setVisible }) => {
   const { data: session } = useSession();
 
   if (isLoading || error) {
-    return <div>Side nav loading...</div>;
+    return (
+      <Sidebar
+        as={Menu}
+        animation="overlay"
+        icon="labeled"
+        inverted
+        onHide={() => setVisible(false)}
+        vertical
+        visible={visible}
+        width="thin"
+      >
+        <Menu.Item>
+          <Link href="/shop">Shop</Link>
+        </Menu.Item>
+      </Sidebar>
+    );
   }
 
   return (
@@ -23,22 +38,15 @@ const SliderNav = ({ visible, setVisible }) => {
       visible={visible}
       width="thin"
     >
-      {data.length === 0 ? (
-        <Menu.Item>
-          <Link href="/shop">Shop</Link>
+      <Menu.Item>
+        <Link href="/shop">Preview</Link>
+      </Menu.Item>
+      {data.map((category, index) => (
+        <Menu.Item key={index}>
+          <Link href={`/shop/${category.path}`}>{category.title}</Link>
         </Menu.Item>
-      ) : (
-        <>
-          <Menu.Item>
-            <Link href="/shop">Preview</Link>
-          </Menu.Item>
-          {data.map((category, index) => (
-            <Menu.Item key={index}>
-              <Link href={`/shop/${category.path}`}>{category.title}</Link>
-            </Menu.Item>
-          ))}
-        </>
-      )}
+      ))}
+
       {session && (
         <Menu.Item>
           <Link href="/user">whishlist</Link>
