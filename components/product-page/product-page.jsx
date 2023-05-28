@@ -88,12 +88,12 @@ const ProductPageComponent = ({ product }) => {
 
   return (
     <ItemContainer>
-      <Grid>
+      <Grid verticalAlign="middle">
         <Grid.Column mobile={16} tablet={8} computer={8}>
           <ImageContainer>
             <Image
-              width={300}
-              height={300}
+              width={500}
+              height={500}
               src={product.image}
               alt={product.title}
               priority={false}

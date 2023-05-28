@@ -16,6 +16,11 @@ export const ImageContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin: 0 auto 2rem auto;
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
 `;
 export const TitleContainer = styled.h3`
   font-weight: 400;
