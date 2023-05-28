@@ -55,9 +55,9 @@ a {
 .ui.segment {
   margin: 0 !important;
   box-shadow: none;
-  border: none;
+  border: none !important;
   padding: 0 !important;
-  border-radius: 0;
+  border-radius: 0 !important;
   min-height: 95vh;
 }
 
@@ -67,7 +67,7 @@ a {
 }
 
 .ui.grid > .column:not(.row) {
-  padding: 0;
+  padding: 0 !important;
 }
 .ui.floating.label {
   top: 0.5rem;
@@ -79,7 +79,7 @@ a {
 .ui.floating.label {
   top: 0.5rem;
   left: 97%;
-  font-family: var(--font-spartan);
+  font-family: var(--font-spartan) !important;
   padding: 0.7rem 0.7rem 0.3rem;
 }
 

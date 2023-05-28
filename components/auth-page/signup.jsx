@@ -31,7 +31,6 @@ const SignUp = ({ setIsLogin }) => {
       let path = "/";
       router.replace(path);
     } catch (error) {
-      console.log(error.message);
       setSignupError(error.message);
     } finally {
       setLoading(false);

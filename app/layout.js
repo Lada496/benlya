@@ -1,6 +1,6 @@
 import ReduxProvider from "../client/providers/redux-provider";
-
 import AuthProvider from "../client/providers/auth-provider";
+import StyledComponentsRegistry from "../lib/resistry";
 import Layout from "../components/layout/layout";
 
 import "semantic-ui-css/semantic.min.css";
@@ -18,7 +18,9 @@ function RootLayout({ children }) {
       <body>
         <AuthProvider>
           <ReduxProvider>
-            <Layout>{children}</Layout>
+            <StyledComponentsRegistry>
+              <Layout>{children}</Layout>
+            </StyledComponentsRegistry>
           </ReduxProvider>
         </AuthProvider>
       </body>

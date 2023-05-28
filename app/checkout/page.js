@@ -28,7 +28,6 @@ const ChackoutPage = () => {
   }, [data?.refetch]);
 
   useEffect(() => {
-    console.log(data);
     if (data?.cartItems && data?.refetch) {
       dispatch(refetchCartItemsCompleted());
     }
