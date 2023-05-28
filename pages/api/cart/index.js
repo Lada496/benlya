@@ -3,9 +3,9 @@ import authOptions from "../auth/[...nextauth]";
 import { connectToDatabase } from "../../../lib/db-utils";
 
 async function handler(req, res) {
-  const session = await getServerSession(req, authOptions);
+  const session = await getServerSession(req, res, authOptions);
   if (!session) {
-    res.status(200).json({ message: "Not authenticated!", cart: null });
+    res.status(200).json({ message: "Not authenticated!", cart: [] });
     return;
   }
 
@@ -17,26 +17,29 @@ async function handler(req, res) {
       const existingUser = await db
         .collection("users")
         .findOne({ email: session.user.email });
-      console.log({ existingUser });
       if (!existingUser) {
         res.status(200).json({ message: "Not logged in" });
       }
-      res.status(200).json({ cart: existingUser.cart });
+
+      const cart = existingUser.cart || []; // Set cart to an empty array if it doesn't exist
+      res.status(200).json({ cart: cart });
     } catch (error) {
       res.status(422).json({ message: "Cart data fetch failed" });
     } finally {
       client.close();
     }
   }
-  if (req.mothod === "DELETE") {
+  if (req.method === "DELETE") {
     const client = await connectToDatabase();
     const db = client.db();
+    const usersCollection = db.collection("users");
 
     try {
       // Reset the user's cart to an empty array
-      await db
-        .collection("users")
-        .updateOne({ email: session.user.email }, { $set: { cart: [] } });
+      await usersCollection.updateOne(
+        { email: session.user.email },
+        { $set: { cart: [] } }
+      );
 
       res.status(200).json({ cart: [] });
     } catch (error) {

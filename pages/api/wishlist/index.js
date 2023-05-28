@@ -16,13 +16,24 @@ async function handler(req, res) {
       const existingUser = await db
         .collection("users")
         .findOne({ email: session.user.email });
-      if (existingUser) {
-        res.status(200).json({ wishlist: existingUser.wishlist });
-      } else {
-        res.status(200).json({ wishlist: null });
-      }
+      res.status(200).json({ wishlist: existingUser.wishlist });
     } catch (error) {
       res.status(422).json({ message: "Wishlist data fetch failed" });
+    } finally {
+      client.close();
+    }
+  }
+  if (req.method === "DELETE") {
+    const client = await connectToDatabase();
+    const db = client.db();
+    try {
+      await db
+        .collection("users")
+        .updateOne({ email: session.user.email }, { $set: { wishlist: [] } });
+
+      res.status(200).json({ wishlist: [] });
+    } catch (error) {
+      res.status(422).json({ message: "Wishlist reset failed" });
     } finally {
       client.close();
     }

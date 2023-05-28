@@ -3,11 +3,16 @@ import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { Icon } from "semantic-ui-react";
 
+// import {
+//   addCartItem,
+//   removeCartItemOne,
+//   removeCartItemAll,
+// } from "../../redux/slice/cart/cart.slice";
 import {
-  addCartItem,
-  removeCartItemOne,
-  removeCartItemAll,
-} from "../../redux/slice/cart/cart.slice";
+  useAddCartItemMutation,
+  useRemoveCartItemOneMutation,
+  useRemoveCartItemsAllMutation,
+} from "../../redux/api/cart/cart.api";
 import {
   CheckoutItemContainer,
   ImageContainer,
@@ -17,15 +22,21 @@ import {
 } from "./checkout-item.styles";
 
 const CheckoutItem = ({ item }) => {
+  const [addCartItem] = useAddCartItemMutation();
+  const [removeCartItemOne] = useRemoveCartItemOneMutation();
+  const [removeCartItemAll] = useRemoveCartItemsAllMutation();
   const dispatch = useDispatch();
-  const addItemHandler = () => {
-    dispatch(addCartItem(item));
+  const addItemHandler = async () => {
+    // dispatch(addCartItem(item));
+    await addCartItem({ cartItemToAdd: item });
   };
-  const removeItemHandler = () => {
-    dispatch(removeCartItemOne(item));
+  const removeItemHandler = async () => {
+    // dispatch(removeCartItemOne(item));
+    await removeCartItemOne({ cartItemToRemove: item });
   };
-  const clearItemHandler = () => {
-    dispatch(removeCartItemAll(item));
+  const clearItemHandler = async () => {
+    // dispatch(removeCartItemAll(item));
+    await removeCartItemAll({ cartItemToRemove: item });
   };
 
   return (

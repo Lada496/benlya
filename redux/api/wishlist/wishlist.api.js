@@ -17,6 +17,28 @@ export const wishlistApi = createApi({
         };
       },
     }),
+    resetWishlist: builder.mutation({
+      query: () => ({
+        url: "wishlist",
+        method: "DELETE",
+      }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          wishlistApi.util.updateQueryData(
+            "getWishlist",
+            undefined,
+            (draft) => {
+              draft.products = [];
+            }
+          )
+        );
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
+    }),
     addWishlistItem: builder.mutation({
       query: ({ wishlist }) => ({
         url: "wishlist/add",
@@ -42,7 +64,6 @@ export const wishlistApi = createApi({
     }),
     deleteWishlistItem: builder.mutation({
       query: ({ productId }) => {
-        console.log(productId);
         return {
           url: `wishlist/delete/${productId}`,
           method: "DELETE",
@@ -50,7 +71,6 @@ export const wishlistApi = createApi({
         };
       },
       async onQueryStarted({ productId }, { dispatch, queryFulfilled }) {
-        console.log({ productId }, { dispatch, queryFulfilled });
         const patchResult = dispatch(
           wishlistApi.util.updateQueryData(
             "getWishlist",
@@ -77,4 +97,5 @@ export const {
   useGetWishlistQuery,
   useAddWishlistItemMutation,
   useDeleteWishlistItemMutation,
+  useResetWishlistMutation,
 } = wishlistApi;

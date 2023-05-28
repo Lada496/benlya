@@ -12,7 +12,6 @@ async function handler(req, res) {
     const client = await connectToDatabase();
     const db = client.db();
     const productId = req.query.productId;
-    console.log(req);
     const usersCollection = db.collection("users");
     try {
       await usersCollection.updateOne(
@@ -22,7 +21,6 @@ async function handler(req, res) {
       const updatedUser = await db
         .collection("users")
         .findOne({ email: session.user.email });
-      console.log({ updatedUser });
       res.status(200).json({ wishlist: updatedUser.wishlist });
     } catch (error) {
       res.status(422).json({ message: "Delete the wishlist idem failed" });

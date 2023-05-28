@@ -1,10 +1,16 @@
 "use client";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
+import { useDispatch } from "react-redux";
 import { Label } from "semantic-ui-react";
-import { resetCart } from "../../redux/slice/cart/cart.slice";
+// import { resetCart } from "../../redux/slice/cart/cart.slice";
 // import { resetWishlist } from "../../redux/wishlist/whishlist.actions";
+import {
+  cartApi,
+  useGetCartItemsQuery,
+  useResetCartMutation,
+} from "../../redux/api/cart/cart.api";
 import {
   HeaderContainer,
   LogoContainer,
@@ -14,16 +20,26 @@ import {
 
 const Header = ({ setVisible, visible }) => {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const {
+    data: cartItems,
+    error,
+    isFetching,
+    refetch,
+  } = useGetCartItemsQuery();
+  const [resetCart] = useResetCartMutation();
 
   const { data: session, status } = useSession();
   const logoutHandler = async () => {
+    await resetCart();
     await signOut({ redirect: false });
-    dispatch(resetCart());
   };
   const showSidebarHandler = () => {
     setVisible(true);
   };
+
+  useEffect(() => {
+    refetch();
+  }, [session]);
   return (
     <HeaderContainer>
       <IconContainer
@@ -50,7 +66,7 @@ const Header = ({ setVisible, visible }) => {
           <li>
             <Link href="/checkout">
               <IconContainer name="shopping cart" size="large" inverted>
-                {cartItems.length >= 1 && (
+                {!error && !isFetching && cartItems.length >= 1 && (
                   <Label color="teal" floating>
                     {cartItems.length}
                   </Label>

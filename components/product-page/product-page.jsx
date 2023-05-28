@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -9,7 +8,13 @@ import { Grid } from "semantic-ui-react";
 import {
   addCartItem,
   removeCartItemAll,
-} from "../../redux/slice/cart/cart.slice";
+} from "../../redux/api/cart/cart.slice";
+
+import {
+  useGetCartItemsQuery,
+  useAddCartItemMutation,
+  useRemoveCartItemsAllMutation,
+} from "../../redux/api/cart/cart.api";
 
 import {
   useGetWishlistQuery,
@@ -28,15 +33,16 @@ import RatingContainer from "../ui/rating-container";
 
 const ProductPageComponent = ({ product }) => {
   const { data: session, status } = useSession();
-  const dispatch = useDispatch();
   const router = useRouter();
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const { data: cartItems } = useGetCartItemsQuery();
   const isIncluded = (item) => item?.id === product.id;
   const [inWishlist, setInWishlist] = useState(false);
-  const [inCartlist, setInCartlist] = useState(cartItems.some(isIncluded));
+  const [inCartlist, setInCartlist] = useState(false);
   const { data, error, isFetching } = useGetWishlistQuery();
   const [addWishlistItem] = useAddWishlistItemMutation();
   const [deleteWishlistItem] = useDeleteWishlistItemMutation();
+  const [addCartItem] = useAddCartItemMutation();
+  const [removeCartItemAll] = useRemoveCartItemsAllMutation();
 
   const wishlist = data?.products;
   useEffect(() => {
@@ -44,23 +50,25 @@ const ProductPageComponent = ({ product }) => {
   }, [wishlist]);
 
   useEffect(() => {
-    setInCartlist(cartItems.some(isIncluded));
+    setInCartlist(cartItems?.some(isIncluded));
   }, [cartItems]);
 
-  const addToCartHandler = () => {
+  const addToCartHandler = async () => {
     if (!session && !status.loading) {
       router.push("/auth");
       return;
     }
-    dispatch(addCartItem(product));
+    await addCartItem({ cartItemToAdd: product });
+    // dispatch(addCartItem(product));
   };
 
-  const removeFromCartHandler = () => {
+  const removeFromCartHandler = async () => {
     if (!session && !status.loading) {
       router.push("/auth");
       return;
     }
-    dispatch(removeCartItemAll(product));
+    // dispatch(removeCartItemAll(product));
+    await removeCartItemAll({ cartItemToRemove: product });
   };
 
   const addToWishlistHandler = async () => {
@@ -68,7 +76,7 @@ const ProductPageComponent = ({ product }) => {
       router.push("/auth");
       return;
     }
-    await addWishlistItem({ wishlist: product }).unwrap();
+    await addWishlistItem({ wishlist: product });
   };
 
   const removeFromWishlistHandker = async () => {
@@ -76,7 +84,7 @@ const ProductPageComponent = ({ product }) => {
       router.push("/auth");
       return;
     }
-    await deleteWishlistItem({ productId: product.id }).unwrap();
+    await deleteWishlistItem({ productId: product.id });
   };
   if (error || isFetching) {
     return <div>Wait</div>;

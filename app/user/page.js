@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useGetWishlistQuery } from "../../redux/api/wishlist/wishlist.api";
@@ -10,11 +11,14 @@ const WishListPage = () => {
   if (!session) {
     redirect("/auth");
   }
-  const { data, isFetching, error } = useGetWishlistQuery();
+  const { data, isFetching, error, refetch } = useGetWishlistQuery();
+
+  useEffect(() => {
+    refetch();
+  }, [session]);
   if (isFetching || error) {
     return <div>WishListPage Loading</div>;
   }
-  console.log({ data });
   return <ProductsList categoryObject={data} />;
 };
 

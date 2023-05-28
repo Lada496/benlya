@@ -3,12 +3,12 @@ import authOptions from "../../../auth/[...nextauth]";
 import { connectToDatabase } from "../../../../../lib/db-utils";
 
 async function handler(req, res) {
-  const session = await getServerSession(req, authOptions);
+  const session = await getServerSession(req, res, authOptions);
   if (!session) {
     res.status(401).json({ message: "Not authenticated!" });
     return;
   }
-  if (req.method === "DELETE") {
+  if (req.method === "POST") {
     const client = await connectToDatabase();
     const db = client.db();
     try {
@@ -17,7 +17,7 @@ async function handler(req, res) {
         .collection("users")
         .updateOne(
           { email: session.user.email },
-          { $pull: { cart: { id: req.body.cartItemId } } }
+          { $pull: { cart: { id: req.body.id } } }
         );
 
       // Fetch the updated user document

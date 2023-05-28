@@ -9,7 +9,6 @@ async function handler(req, res) {
     return;
   }
   if (req.method === "PATCH") {
-    console.log("run");
     const client = await connectToDatabase();
     const db = client.db();
     const wishlist = req.body;
