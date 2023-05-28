@@ -11,7 +11,10 @@ export const cartApi = createApi({
     getCartItems: builder.query({
       query: () => "cart",
       transformResponse: (response) => {
-        return response.cart;
+        return {
+          cartItems: response.cart,
+          refetch: false,
+        };
       },
     }),
     resetCart: builder.mutation({
@@ -23,7 +26,10 @@ export const cartApi = createApi({
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
           cartApi.util.updateQueryData("getCartItems", undefined, (draft) => {
-            draft = [];
+            draft = {
+              ...draft,
+              cartItems: [],
+            };
           })
         );
         try {
@@ -42,8 +48,14 @@ export const cartApi = createApi({
       async onQueryStarted({ cartItemToAdd }, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
           cartApi.util.updateQueryData("getCartItems", undefined, (draft) => {
-            const updatedCartItems = addItemToCart(draft, cartItemToAdd);
-            return (draft = updatedCartItems);
+            const updatedCartItems = addItemToCart(
+              draft.cartItems,
+              cartItemToAdd
+            );
+            return {
+              ...draft,
+              cartItems: updatedCartItems,
+            };
           })
         );
         try {
@@ -63,10 +75,13 @@ export const cartApi = createApi({
         const patchResult = dispatch(
           cartApi.util.updateQueryData("getCartItems", undefined, (draft) => {
             const updatedCartItems = removeItemFromCart(
-              draft,
+              draft.cartItems,
               cartItemToRemove
             );
-            return (draft = updatedCartItems);
+            return {
+              ...draft,
+              cartItems: updatedCartItems,
+            };
           })
         );
         try {
@@ -85,9 +100,13 @@ export const cartApi = createApi({
       async onQueryStarted({ cartItemToRemove }, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
           cartApi.util.updateQueryData("getCartItems", undefined, (draft) => {
-            return (draft = draft.filter(
+            const updatedCartItems = draft.cartItems.filter(
               (item) => item.id !== cartItemToRemove.id
-            ));
+            );
+            return {
+              ...draft,
+              cartItems: updatedCartItems,
+            };
           })
         );
         try {
@@ -100,6 +119,18 @@ export const cartApi = createApi({
   }),
   keepUnusedDataFor: 60 * 60 * 1000, // Cache unused data for 1 hour
 });
+
+export const startRefechCartItems = () =>
+  cartApi.util.updateQueryData("getCartItems", undefined, (draft) => ({
+    ...draft,
+    refetch: true,
+  }));
+
+export const refetchCartItemsCompleted = () =>
+  cartApi.util.updateQueryData("getCartItems", undefined, (draft) => ({
+    ...draft,
+    refetch: false,
+  }));
 
 export const {
   useGetCartItemsQuery,

@@ -6,11 +6,6 @@ import { useSession } from "next-auth/react";
 import { Grid } from "semantic-ui-react";
 
 import {
-  addCartItem,
-  removeCartItemAll,
-} from "../../redux/api/cart/cart.slice";
-
-import {
   useGetCartItemsQuery,
   useAddCartItemMutation,
   useRemoveCartItemsAllMutation,
@@ -34,7 +29,8 @@ import RatingContainer from "../ui/rating-container";
 const ProductPageComponent = ({ product }) => {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const { data: cartItems } = useGetCartItemsQuery();
+  const { data: cart } = useGetCartItemsQuery();
+  const cartItems = cart?.cartItems;
   const isIncluded = (item) => item?.id === product.id;
   const [inWishlist, setInWishlist] = useState(false);
   const [inCartlist, setInCartlist] = useState(false);

@@ -1,13 +1,7 @@
 "use client";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
 import { Icon } from "semantic-ui-react";
 
-// import {
-//   addCartItem,
-//   removeCartItemOne,
-//   removeCartItemAll,
-// } from "../../redux/slice/cart/cart.slice";
 import {
   useAddCartItemMutation,
   useRemoveCartItemOneMutation,
@@ -25,17 +19,15 @@ const CheckoutItem = ({ item }) => {
   const [addCartItem] = useAddCartItemMutation();
   const [removeCartItemOne] = useRemoveCartItemOneMutation();
   const [removeCartItemAll] = useRemoveCartItemsAllMutation();
-  const dispatch = useDispatch();
+
   const addItemHandler = async () => {
-    // dispatch(addCartItem(item));
     await addCartItem({ cartItemToAdd: item });
   };
   const removeItemHandler = async () => {
-    // dispatch(removeCartItemOne(item));
     await removeCartItemOne({ cartItemToRemove: item });
   };
+
   const clearItemHandler = async () => {
-    // dispatch(removeCartItemAll(item));
     await removeCartItemAll({ cartItemToRemove: item });
   };
 

@@ -2,12 +2,8 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
-import { useDispatch } from "react-redux";
 import { Label } from "semantic-ui-react";
-// import { resetCart } from "../../redux/slice/cart/cart.slice";
-// import { resetWishlist } from "../../redux/wishlist/whishlist.actions";
 import {
-  cartApi,
   useGetCartItemsQuery,
   useResetCartMutation,
 } from "../../redux/api/cart/cart.api";
@@ -19,13 +15,8 @@ import {
 } from "./header.styles";
 
 const Header = ({ setVisible, visible }) => {
-  const dispatch = useDispatch();
-  const {
-    data: cartItems,
-    error,
-    isFetching,
-    refetch,
-  } = useGetCartItemsQuery();
+  const { data, error, isFetching, refetch } = useGetCartItemsQuery();
+  const cartItems = data?.cartItems;
   const [resetCart] = useResetCartMutation();
 
   const { data: session, status } = useSession();
