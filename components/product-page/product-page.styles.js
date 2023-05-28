@@ -44,4 +44,7 @@ export const ButtonContainer = styled.button`
   padding: 0.5rem auto;
   margin: 1rem auto;
   font-family: var(--font-spartan);
+  &:hover {
+    cursor: pointer;
+  }
 `;
