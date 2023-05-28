@@ -1,4 +1,3 @@
-"use client";
 import styled, { keyframes } from "styled-components";
 const pulseAnimation = keyframes`
   0% {

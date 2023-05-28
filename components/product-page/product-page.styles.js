@@ -1,4 +1,3 @@
-"use client";
 import styled from "styled-components";
 export const ItemContainer = styled.div`
   margin: 6rem auto;

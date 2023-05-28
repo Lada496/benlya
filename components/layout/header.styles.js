@@ -1,4 +1,3 @@
-"use client";
 import styled from "styled-components";
 import { Icon } from "semantic-ui-react";
 import Link from "next/link";
