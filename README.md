@@ -3,12 +3,8 @@
 ecommerce website with dummy data ([Demo](https://e-shop-taupe.vercel.app))
 
 ## Purpose
-
-- deepen my understanding of classical redux by using redux and related libraries such as redux-thunk and redux-persist
-- try using Next.js and Semantic UI React
-
-## Challenging parts
-- Understand Next.js specific behavior: For example, orchestrating Next.js and Redux especially using redux-persist. I refered these two coding examples([nextjs-with-redux-thunk](https://github.com/vercel/next.js/tree/canary/examples/with-redux-thunk), [nextjs-with-redux-wrapper-redux-persist](https://github.com/fazlulkarimweb/with-next-redux-wrapper-redux-persist)). In addition, I refered [this stackoverflow topic](https://stackoverflow.com/questions/65383169/vercel-next-js-environment-variable-not-working/65746862#65746862) to deal with environment-variable in Next.js app.
+- Try Next.js v13/App Router
+- Deepening my understandings of RTK Query
 
 ## Screenshots
 <img width="509" alt="Screen Shot 2022-01-04 at 21 37 20" src="https://user-images.githubusercontent.com/67321065/148165971-1da47cd1-836f-40cc-bc57-872264710eca.png">
@@ -16,18 +12,22 @@ ecommerce website with dummy data ([Demo](https://e-shop-taupe.vercel.app))
 <img width="512" alt="Screen Shot 2022-01-04 at 21 32 56" src="https://user-images.githubusercontent.com/67321065/148166009-740073ac-4d96-4e54-9d39-467573d21992.png">
 
 ## Reference
-
-- https://stackoverflow.com/questions/65383169/vercel-next-js-environment-variable-not-working/65746862#65746862
-- https://github.com/vercel/next.js/tree/canary/examples/with-redux-thunk
-- https://github.com/fazlulkarimweb/with-next-redux-wrapper-redux-persist
+- https://nextjs.org/docs/app/api-reference/functions/generate-metadata
+- https://nextjs.org/docs/app/building-your-application/optimizing/metadata#seo
+- https://nextjs.org/docs/app/building-your-application/data-fetching/fetching
+- https://nextjs.org/docs/pages/building-your-application/upgrading/app-router-migration#step-4-migrating-pages
+- https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming
 
 ## Libraries/Technology/API
 
-- Framework: Nest.js
+- Framework: Next.js
 - Authentication: NextAuth.js
 - Checkout: Stripe
-- Data managiment: Redux, Redux Thunk, Redux Persist, next-redux-wrapper
+- State managiment: RTK Query
 - Dammy data: [FakeStoreAPI](https://fakestoreapi.com/docs), uuid
 - Database: MongoDB
 - Styling: Semantic UI React, styled component
 - Others: axios, React Hook Form
+
+## Articles
+- https://medium.com/@lada496/list/nextjs-v13-updates-7155f8a3abdd
