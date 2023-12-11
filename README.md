@@ -1,9 +1,9 @@
 ## Strong points
 
-These are the features I found it convenient to use Intuita for migrating App Router
-👍 Intuita updated folder structure to apply App Router
-👍 Intuita updated `useRouter` source file
-👍 Intuita automatically put `"use client"` directive when necessary
+These are the features I found it convenient to use Intuita for migrating App Router <br>
+👍 Intuita updated folder structure to apply App Router <br>
+👍 Intuita updated `useRouter` source file <br>
+👍 Intuita automatically put `"use client"` directive when necessary <br>
 
 ## Features nice to have
 
@@ -16,7 +16,7 @@ These are what I think can improve users' experience with this tool
 - **deal with page router only hooks**
   Some hooks only available with Page Router such as `getServerSideProps`and `getStaticPaths`are still used in new files. (e.g. [app/user](./app/user/page.tsx), [app/shop/[category]/[productId]](app/shop/[category]/[productId]/page.tsx)). If we could replace these hooks with App Router way, that would be great. At least, it'd be helpful if we could get error messages.
 - **deal with third party library imports**
-  I found that new files forgot to import third-party libraries. (e.g.[app/user](./app/user/page.tsx)(`axios`), [app/shop/[category]/[productId]](app/shop/[category]/[productId]/page.tsx)(getSession)).
+  I found that new files forgot to import third-party libraries. (e.g.[app/user](./app/user/page.tsx)(axios), [app/shop/[category]/[productId]](app/shop/[category]/[productId]/page.tsx)(getSession)).
 
 ## Errors
 
