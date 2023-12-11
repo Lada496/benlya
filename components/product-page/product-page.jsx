@@ -1,7 +1,7 @@
+import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { useSession } from "next-auth/client";
 import { Grid } from "semantic-ui-react";
 import {

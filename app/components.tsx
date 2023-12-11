@@ -1,3 +1,5 @@
+"use client";
+// This file has been sourced from: /beoshare/pages/index.js
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSession } from "next-auth/client";

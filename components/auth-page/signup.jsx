@@ -1,5 +1,5 @@
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import Message from "../ui/message";
 import { createUser } from "../../lib/auth-utils";

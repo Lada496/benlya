@@ -1,9 +1,10 @@
+"use client";
+// This file has been sourced from: /beoshare/pages/shop/[category]/index.js
 import { useSelector } from "react-redux";
 
 import Link from "next/link";
-import Head from "next/head";
 import { withRouter } from "next/router";
-import ProductsList from "../../../components/products-list/products-list";
+import ProductsList from "../../../../components/products-list/products-list";
 
 const CategoryPage = ({ router }) => {
   const categories = useSelector((state) => state.categories);
@@ -35,10 +36,6 @@ const CategoryPage = ({ router }) => {
   )[0];
   return (
     <>
-      <Head>
-        <title>Shop by Category</title>
-        <meta name="description" content="Products list by each category" />
-      </Head>
       <ProductsList categoryObject={categoryObject} />
     </>
   );
